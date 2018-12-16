@@ -1,0 +1,39 @@
+.layui-layer-btn {
+    text-align: center;
+    padding: 0 15px 12px;
+    pointer-events: auto;
+    user-select: none;
+    -webkit-user-select: none;
+}
+.c-layer .layui-layer-btn .layui-layer-btn1 {
+    background: #009688;
+    color: #fff;
+    border: 1px solid #009688;
+    width: 80px;
+    height: 40px;
+    line-height: 40px;
+}
+
+
+.c-layer .layui-layer-btn .layui-layer-btn0 {
+    background: #fff;
+    color: #282828;
+    border: 1px solid #bfbfbf;
+    width: 80px;
+    height: 40px;
+    line-height: 40px;
+}
+.c-layer-content {
+    margin: 20px;
+}
+.table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+    border-top: 1px solid #ffffff;
+    line-height: 1.42857;
+    padding: 8px;
+    vertical-align: middle;
+}
+#modal-table {
+    text-align: right;
+    font-size: small;
+    margin-top: 20px;
+}
