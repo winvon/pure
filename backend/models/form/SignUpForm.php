@@ -57,7 +57,7 @@ class SignUpForm extends Model
             ],*/
             ['telephone', 'filter', 'filter' => 'trim'],
             ['telephone', 'required'],
-            ['telephone','match','pattern'=>'/^[1][34578][0-9]{9}$/'],
+//            ['telephone','match','pattern'=>'/^[1][34578][0-9]{9}$/'],
             ['telephone', 'string', 'max' => 20],
         ];
     }

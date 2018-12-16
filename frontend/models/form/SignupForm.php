@@ -46,7 +46,6 @@ class SignupForm extends Model
                 'message' => yii::t('frontend', 'This username has already been taken')
             ],
             ['username', 'string', 'min' => 2, 'max' => 255],
-
             ['email', 'filter', 'filter' => 'trim'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
@@ -58,7 +57,7 @@ class SignupForm extends Model
             ],
             ['telephone', 'filter', 'filter' => 'trim'],
             ['telephone', 'required'],
-            ['telephone', 'match', 'pattern' => '/^[1][34578][0-9]{9}$/'],
+//            ['telephone', 'match', 'pattern' => '/^[1][34578][0-9]{9}$/'],
             ['telephone', 'string', 'max' => 20],
             [
                 'telephone',
