@@ -1,0 +1,158 @@
+a:2:{i:0;a:2:{i:0;s:7289:"                                        <li>
+                        <a  href="">
+                            <i class="fa fa fa-cogs"></i>
+                            <span class="nav-label">设置</span>
+                            <span class="fa  arrow"></span>
+                        </a>
+                        <ul class='nav nav-second-level '>
+                            <li>
+                                <a class="J_menuItem" href="/setting/website" data-index="1">网站设置</a>
+                            
+                            </li>
+
+                            <li>
+                                <a class="J_menuItem" href="/setting/smtp" data-index="2">SMTP设置</a>
+                            
+                            </li>
+
+                            <li>
+                                <a class="J_menuItem" href="/setting/custom" data-index="3">自定义设置</a>
+                            
+                            </li>
+</ul>
+                    </li>                    <li>
+                        <a class="J_menuItem" href="/type/index">
+                            <i class="fa fa fa-asl-interpreting "></i>
+                            <span class="nav-label">测试</span>
+                            <span class="fa "></span>
+                        </a>
+                        
+                    </li>                    <li>
+                        <a  href="">
+                            <i class="fa fa fa-th-list"></i>
+                            <span class="nav-label">菜单</span>
+                            <span class="fa  arrow"></span>
+                        </a>
+                        <ul class='nav nav-second-level '>
+                            <li>
+                                <a class="J_menuItem" href="/frontend-menu/index" data-index="4">前台菜单</a>
+                            
+                            </li>
+
+                            <li>
+                                <a class="J_menuItem" href="/menu/index" data-index="5">后台菜单</a>
+                            
+                            </li>
+</ul>
+                    </li>                    <li>
+                        <a class="J_menuItem" href="/order/index">
+                            <i class="fa fa fa-heart"></i>
+                            <span class="nav-label">预约</span>
+                            <span class="fa "></span>
+                        </a>
+                        
+                    </li>                    <li>
+                        <a class="J_menuItem" href="/notice/index">
+                            <i class="fa fa fa-volume-up"></i>
+                            <span class="nav-label">公告</span>
+                            <span class="fa "></span>
+                        </a>
+                        
+                    </li>                    <li>
+                        <a  href="">
+                            <i class="fa fa fa-edit"></i>
+                            <span class="nav-label">内容</span>
+                            <span class="fa  arrow"></span>
+                        </a>
+                        <ul class='nav nav-second-level '>
+                            <li>
+                                <a class="J_menuItem" href="/article/index" data-index="6">文章</a>
+                            
+                            </li>
+
+                            <li>
+                                <a class="J_menuItem" href="/category/index" data-index="7">分类</a>
+                            
+                            </li>
+
+                            <li>
+                                <a class="J_menuItem" href="/comment/index" data-index="8">评论</a>
+                            
+                            </li>
+
+                            <li>
+                                <a class="J_menuItem" href="/page/index" data-index="9">单页</a>
+                            
+                            </li>
+</ul>
+                    </li>                    <li>
+                        <a  href="">
+                            <i class="fa fa  fa-credit-card"></i>
+                            <span class="nav-label">支付</span>
+                            <span class="fa  arrow"></span>
+                        </a>
+                        <ul class='nav nav-second-level '>
+                            <li>
+                                <a class="J_menuItem" href="/pay/index" data-index="10">支付记录</a>
+                            
+                            </li>
+</ul>
+                    </li>                    <li>
+                        <a  href="/user/index">
+                            <i class="fa fa fa-users"></i>
+                            <span class="nav-label">用户</span>
+                            <span class="fa  arrow"></span>
+                        </a>
+                        <ul class='nav nav-second-level '>
+                            <li>
+                                <a class="J_menuItem" href="/user/index" data-index="11">前台用户</a>
+                            
+                            </li>
+
+                            <li>
+                                <a class="J_menuItem" href="/admin-user/index" data-index="12">后台用户</a>
+                            
+                            </li>
+</ul>
+                    </li>                    <li>
+                        <a  href="">
+                            <i class="fa fa fa-th-large"></i>
+                            <span class="nav-label">权限管理</span>
+                            <span class="fa  arrow"></span>
+                        </a>
+                        <ul class='nav nav-second-level '>
+                            <li>
+                                <a class="J_menuItem" href="/rbac/permissions" data-index="13">权限</a>
+                            
+                            </li>
+
+                            <li>
+                                <a class="J_menuItem" href="/rbac/roles" data-index="14">角色</a>
+                            
+                            </li>
+</ul>
+                    </li>                    <li>
+                        <a  href="">
+                            <i class="fa fa fa-file"></i>
+                            <span class="nav-label">缓存</span>
+                            <span class="fa  arrow"></span>
+                        </a>
+                        <ul class='nav nav-second-level '>
+                            <li>
+                                <a class="J_menuItem" href="/clear/frontend" data-index="15">清除前台</a>
+                            
+                            </li>
+
+                            <li>
+                                <a class="J_menuItem" href="/clear/backend" data-index="16">清除后台</a>
+                            
+                            </li>
+</ul>
+                    </li>                    <li>
+                        <a class="J_menuItem" href="/log/index">
+                            <i class="fa fa fa-history"></i>
+                            <span class="nav-label">日志</span>
+                            <span class="fa "></span>
+                        </a>
+                        
+                    </li>                    ";i:1;N;}i:1;O:26:"yii\caching\FileDependency":3:{s:8:"fileName";s:64:"E:\webApp\backend\runtime/cache/file_dependency/backend_menu.txt";s:4:"data";i:1544957578;s:8:"reusable";b:0;}}

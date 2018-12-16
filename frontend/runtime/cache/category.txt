@@ -1,0 +1,1 @@
+{"\/<cat:0>":"article\/index","\/<cat:java>":"article\/index","\/<cat:javascript>":"article\/index"}
