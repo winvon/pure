@@ -159,10 +159,10 @@ $this->params['breadcrumbs'][] = $this->title;
             layer.msg('请输入手机号码');
             return false;
         }
-        if (!pattern.test(phone)) {
-            layer.msg('手机号格式错误');
-            return false;
-        }
+//        if (!pattern.test(phone)) {
+//            layer.msg('手机号格式错误');
+//            return false;
+//        }
         var ct =checkTel(phone);
 
         if (ct==true) {
