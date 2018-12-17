@@ -12,10 +12,14 @@ use Yii;
 
 class Common
 {
+    public static $_district='';
+
+
     public static function sendRegisterCode()
     {
         $post = Yii::$app->request->post();
         $district = (string)trim(explode(":", $post['district'])[1], ' ');
+        Common::$_district=$district;
         $telephone = $district . (string)$post['telephone'];
         $cache = Yii::$app->cache;
         self::sendCode($telephone);

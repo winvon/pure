@@ -132,7 +132,6 @@ abstract class BaseActiveRecord extends Model implements ActiveRecordInterface
     protected static function findByCondition($condition)
     {
         $query = static::find();
-
         if (!ArrayHelper::isAssociative($condition)) {
             // query by primary key
             $primaryKey = static::primaryKey();
@@ -143,7 +142,6 @@ abstract class BaseActiveRecord extends Model implements ActiveRecordInterface
                 throw new InvalidConfigException('"' . get_called_class() . '" must have a primary key.');
             }
         }
-
         return $query->andWhere($condition);
     }
 

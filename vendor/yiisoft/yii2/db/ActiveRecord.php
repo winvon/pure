@@ -346,7 +346,6 @@ class ActiveRecord extends BaseActiveRecord
     {
         $command = static::getDb()->createCommand();
         $command->delete(static::tableName(), $condition, $params);
-
         return $command->execute();
     }
 

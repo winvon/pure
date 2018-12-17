@@ -21,7 +21,12 @@ class Telephone
         if ($res !== true) {
             return $res;
         }
-        Yii::$app->smser->send($telephone, "【漩舞國際】您的验证码是$code");
+        if (!in_array(Common::$_district,['+86','+886','+852','+853']) ){
+            $string= "【PURELOVE】Your verification code is $code, valid within 20 minutes. Don't let it out.";
+        }else{
+            $string= "【PURELOVE】您的验证码是$code,20分钟内有效。请勿泄露。";
+        }
+        Yii::$app->smser->send($telephone, $string);
         return true;
     }
 
