@@ -85,7 +85,7 @@ class User extends ActiveRecord implements IdentityInterface
                 'targetClass' => User::className(),
                 'message' => yii::t('app', 'This username has already been taken')
             ],
-            ['telephone', 'filter', 'filter' => 'trim'], 
+            ['telephone', 'filter', 'filter' => 'trim'],
             [['repassword'], 'compare', 'compareAttribute' => 'password'],
             [['avatar'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg, gif, webp'],
             [['status'], 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
