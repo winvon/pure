@@ -1,0 +1,147 @@
+Message-ID: <a7198d9fffa963fb760ff17da9a39cc2@backend.com>
+Date: Mon, 17 Dec 2018 22:06:06 +0800
+Subject: =?UTF-8?Q?=E6=9D=A5=E8=87=AA?= Feehi CMS
+ =?UTF-8?Q?=E5=90=8E=E5=8F=B0=E7=9A=84=E6=96=B0?=
+ =?UTF-8?Q?=E6=97=A5=E5=BF=97=E6=B6=88=E6=81=AF?=
+From: Feehi CMS robot  <admin@feehi.com>
+To: admin@feehi.com, liufee@126.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+2018-12-17 22:06:06 [127.0.0.1][-][-][warning][application]
+=E8=AF=B7=E4=BD=BF=E7=94=A8"fileMode"=E6=9B=BF=E4=BB=A3"useFileTransport"=
+=EF=BC=8C"useFileTransport"=E5=9C=A8=E6=9C=AA=E6=9D=A5=E5=B0=86=E4=B8=8D=
+=E4=BC=9A=E5=BE=97=E5=88=B0=E6=94=AF=E6=8C=81=EF=BC=81
+    in E:\webApp\vendor\daixianceng\yii2-smser\src\Smser.php:135
+    in E:\webApp\common\components\Telephone.php:29
+    in E:\webApp\common\components\Common.php:44
+2018-12-17 22:06:06 [127.0.0.1][-][-][info][application] $_GET =3D []
+
+$_POST =3D [
+    '_csrf_backend' =3D>
+'mlBYeWx-HJqWy0NBTpxWSqt2X33mCwrrwUVgKkH9zfPDYg86JhMqyfqdEQMo3iMO5iAAMYJlPq=
+W3FCkdBbm7uA=3D=3D'
+    'telephone' =3D> '66293812'
+    'district' =3D> 'Hong Kong (=E9=A6=99=E6=B8=AF): +852'
+]
+
+$_FILES =3D []
+
+$_COOKIE =3D [
+    'PHPSESSID' =3D> 'rf23icspkg65vptg77hc2m4gi7'
+    '_csrf_backend' =3D>
+'19578b88105e03c70bb6d8f5d064ca29a842ed1e0f8a6db63b873dd990d3e732a:2:{i:0;=
+s:13:\"_csrf_backend\";i:1;s:32:\"Y2WCJm6SlVRBfBuDMV_Ldn4NvQI7DDvK\";}'
+]
+
+$_SESSION =3D [
+    '__flash' =3D> []
+    '_backend_returnUrl' =3D> '/'
+]
+
+$_SERVER =3D [
+    'ALLUSERSPROFILE' =3D> 'C:\\ProgramData'
+    'APPDATA' =3D> 'C:\\Users\\FOCUS\\AppData\\Roaming'
+    'CommonProgramFiles' =3D> 'C:\\Program Files\\Common Files'
+    'CommonProgramFiles(x86)' =3D> 'C:\\Program Files (x86)\\Common
+Files'
+    'CommonProgramW6432' =3D> 'C:\\Program Files\\Common Files'
+    'COMPUTERNAME' =3D> 'DESKTOP-JJ1DDK5'
+    'ComSpec' =3D> 'C:\\WINDOWS\\system32\\cmd.exe'
+    'DriverData' =3D> 'C:\\Windows\\System32\\Drivers\\DriverData'
+    'FPS_BROWSER_APP_PROFILE_STRING' =3D> 'Internet Explorer'
+    'FPS_BROWSER_USER_PROFILE_STRING' =3D> 'Default'
+    'HOMEDRIVE' =3D> 'C:'
+    'HOMEPATH' =3D> '\\Users\\FOCUS'
+    'LOCALAPPDATA' =3D> 'C:\\Users\\FOCUS\\AppData\\Local'
+    'LOGONSERVER' =3D> '\\\\DESKTOP-JJ1DDK5'
+    'NUMBER_OF_PROCESSORS' =3D> '8'
+    'OneDrive' =3D> 'C:\\Users\\FOCUS\\OneDrive'
+    'OS' =3D> 'Windows_NT'
+    'Path' =3D> 'C:\\Program Files (x86)\\Intel\\iCLS
+Client\\;C:\\Program Files\\Intel\\iCLS
+Client\\;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:=
+\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program
+Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Program Files
+(x86)\\Intel\\Intel(R) Management Engine Components\\DAL;C:\\Program
+Files\\Intel\\Intel(R) Management Engine Components\\DAL;C:\\Program
+Files (x86)\\Intel\\Intel(R) Management Engine
+Components\\IPT;C:\\Program Files\\Intel\\Intel(R) Management Engine
+Components\\IPT;E:\\phpStudy\\php\\php-7.0.12-nts;C:\\ProgramData\\Compos=
+erSetup\\bin;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wb=
+em;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program
+Files\\TortoiseSVN\\bin;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\Program
+Files\\Git\\cmd;C:\\Program
+Files\\TortoiseGit\\bin;C:\\Users\\FOCUS\\AppData\\Roaming\\Composer\\ven=
+dor\\bin;C:\\Users\\FOCUS\\AppData\\Local\\Microsoft\\WindowsApps;'
+    'PATHEXT' =3D>
+'.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'PROCESSOR_ARCHITECTURE' =3D> 'AMD64'
+    'PROCESSOR_IDENTIFIER' =3D> 'Intel64 Family 6 Model 94 Stepping 3,
+GenuineIntel'
+    'PROCESSOR_LEVEL' =3D> '6'
+    'PROCESSOR_REVISION' =3D> '5e03'
+    'ProgramData' =3D> 'C:\\ProgramData'
+    'ProgramFiles' =3D> 'C:\\Program Files'
+    'ProgramFiles(x86)' =3D> 'C:\\Program Files (x86)'
+    'ProgramW6432' =3D> 'C:\\Program Files'
+    'PSModulePath' =3D> 'C:\\Program
+Files\\WindowsPowerShell\\Modules;C:\\WINDOWS\\system32\\WindowsPowerShell=
+\\v1.0\\Modules'
+    'PUBLIC' =3D> 'C:\\Users\\Public'
+    'SESSIONNAME' =3D> 'Console'
+    'SystemDrive' =3D> 'C:'
+    'SystemRoot' =3D> 'C:\\WINDOWS'
+    'TEMP' =3D> 'C:\\Users\\FOCUS\\AppData\\Local\\Temp'
+    'TMP' =3D> 'C:\\Users\\FOCUS\\AppData\\Local\\Temp'
+    'USERDOMAIN' =3D> 'DESKTOP-JJ1DDK5'
+    'USERDOMAIN_ROAMINGPROFILE' =3D> 'DESKTOP-JJ1DDK5'
+    'USERNAME' =3D> 'FOCUS'
+    'USERPROFILE' =3D> 'C:\\Users\\FOCUS'
+    'windir' =3D> 'C:\\WINDOWS'
+    'HTTP_COOKIE' =3D> 'PHPSESSID=3Drf23icspkg65vptg77hc2m4gi7;
+_csrf_backend=3D19578b88105e03c70bb6d8f5d064ca29a842ed1e0f8a6db63b873dd99=
+0d3e732a%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf_backend%22%3Bi%3A1%3Bs%3A32%=
+3A%22Y2WCJm6SlVRBfBuDMV_Ldn4NvQI7DDvK%22%3B%7D'
+    'HTTP_ACCEPT_LANGUAGE' =3D> 'zh-CN,zh;q=3D0.9'
+    'HTTP_ACCEPT_ENCODING' =3D> 'gzip, deflate'
+    'HTTP_REFERER' =3D> 'http://backend.com/admin-user/signup'
+    'HTTP_CONTENT_TYPE' =3D> 'application/x-www-form-urlencoded;
+charset=3DUTF-8'
+    'HTTP_USER_AGENT' =3D> 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)
+AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77
+Safari/537.36'
+    'HTTP_X_REQUESTED_WITH' =3D> 'XMLHttpRequest'
+    'HTTP_ORIGIN' =3D> 'http://backend.com'
+    'HTTP_ACCEPT' =3D> '*/*'
+    'HTTP_CONTENT_LENGTH' =3D> '175'
+    'HTTP_CONNECTION' =3D> 'keep-alive'
+    'HTTP_HOST' =3D> 'backend.com'
+    'REDIRECT_STATUS' =3D> '200'
+    'SERVER_NAME' =3D> 'backend.com'
+    'SERVER_PORT' =3D> '80'
+    'SERVER_ADDR' =3D> '127.0.0.1'
+    'REMOTE_PORT' =3D> '55185'
+    'REMOTE_ADDR' =3D> '127.0.0.1'
+    'SERVER_SOFTWARE' =3D> 'nginx/1.11.5'
+    'GATEWAY_INTERFACE' =3D> 'CGI/1.1'
+    'SERVER_PROTOCOL' =3D> 'HTTP/1.1'
+    'DOCUMENT_ROOT' =3D> 'E:\\webApp\\backend\\web'
+    'DOCUMENT_URI' =3D> '/index.php/public/send-mobile-code'
+    'REQUEST_URI' =3D> '/public/send-mobile-code'
+    'SCRIPT_NAME' =3D> '/index.php'
+    'CONTENT_LENGTH' =3D> '175'
+    'CONTENT_TYPE' =3D> 'application/x-www-form-urlencoded;
+charset=3DUTF-8'
+    'REQUEST_METHOD' =3D> 'POST'
+    'QUERY_STRING' =3D> ''
+    'PATH_TRANSLATED' =3D>
+'E:\\webApp\\backend\\web/public/send-mobile-code'
+    'PATH_INFO' =3D> '/public/send-mobile-code'
+    'SCRIPT_FILENAME' =3D> 'E:\\webApp\\backend\\web/index.php'
+    'FCGI_ROLE' =3D> 'RESPONDER'
+    'PHP_SELF' =3D> '/index.php/public/send-mobile-code'
+    'REQUEST_TIME_FLOAT' =3D> 1545055566.1262
+    'REQUEST_TIME' =3D> 1545055566
+]

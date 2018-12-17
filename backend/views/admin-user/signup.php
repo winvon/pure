@@ -59,7 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
             top: 2px;
             right: 1px;
         }
-        .intl-tel-input .country-list{
+        .intl-tel-input .country-list {
             z-index: 100;
         }
     </style>
