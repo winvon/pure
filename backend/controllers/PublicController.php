@@ -13,7 +13,7 @@ use backend\models\User;
 use yii\web\Controller;
 use Yii;
 use common\components\Common;
-class PublicController extends Controller
+class PublicController extends BackendController
 {
 
     public function actionSendMobileCode()

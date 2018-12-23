@@ -20,7 +20,7 @@ use backend\widgets\Bar;
 use backend\grid\CheckboxColumn;
 use backend\grid\ActionColumn;
 use backend\models\User;
-
+use backend\models\AdminUser;
 $assignment = function ($url, $model) {
     return Html::a('<i class="fa fa-tablet"></i> ' . yii::t('app', 'Assign Roles'), Url::to([
         'assign',
@@ -54,46 +54,48 @@ $this->params['breadcrumbs'][] = yii::t('app', 'Admin Users');
                             'attribute' => 'username',
                         ],
                         [
-                            'attribute' => 'nickname',
-                        ],
+                            'attribute' => 'realname',
+                        ] ,
                         [
-                            'attribute' => 'role',
-                            'label' => yii::t('app', 'Role'),
-                            'value' => function ($model) {
-                                /** @var $model backend\models\User */
-                                return $model->getRolesNameString();
-                            },
-                        ],
-                        [
-                            'attribute' => 'email',
+                            'attribute' => 'telephone',
                         ],
                         [
                             'attribute' => 'district',
-                            'width'=>'13%',
+                            'width' => '13%',
                         ],
                         [
-                            'attribute' => 'status',
+                            'attribute' => 'admin_status',
                             'label' => yii::t('app', 'Status'),
                             'value' => function ($model) {
-                                if($model->status == User::STATUS_ACTIVE){
-                                    return yii::t('app', 'Normal');
-                                }else if( $model->status == User::STATUS_DELETED ){
-                                    return yii::t('app', 'Disabled');
+                                if ($model->admin_status == User::STATUS_ADMIN_CHECK) {
+                                    return yii::t('app', '待审核');
+                                } else if ($model->admin_status == User::STATUS_ADMIN_PASS) {
+                                    return yii::t('app', '通过');
+                                } else if ($model->admin_status == User::STATUS_ADMIN_PASS_NOT) {
+                                    return yii::t('app', '拒绝');
                                 }
                             },
-                            'filter' => User::getStatuses(),
+                            'filter' => User::getAdminStatuses(),
                         ],
                         [
                             'class' => DateColumn::className(),
                             'attribute' => 'created_at',
                         ],
-                        [
-                            'class' => DateColumn::className(),
-                            'attribute' => 'updated_at',
-                        ],
+
                         [
                             'class' => ActionColumn::className(),
-                            'buttons' => ['assignment' => $assignment],
+                            'template' => '{view-layer} {check}',
+                            'buttons' => [
+                                'assignment' => $assignment,
+                                'check' => function ($url, $model, $key, $index, $gridView) {
+                                    if ($model->admin_status!=AdminUser::STATUS_ADMIN_PASS)
+                                    return Html::a('<i class="fa fa-pencil"></i> ', $url, [
+                                        'title' => Yii::t('app', '审核'),
+                                        'data-pjax' => '0',
+                                        'class' => 'btn btn-white btn-sm',
+                                    ]);
+                                }
+                            ],
                         ],
                     ]
                 ]); ?>

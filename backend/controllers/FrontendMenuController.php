@@ -19,7 +19,7 @@ use backend\actions\SortAction;
 /**
  * FrontendMenu controller
  */
-class FrontendMenuController extends \yii\web\Controller
+class FrontendMenuController extends BackendController
 {
 
     public function actions()

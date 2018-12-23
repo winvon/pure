@@ -39,6 +39,10 @@ class User extends ActiveRecord implements IdentityInterface
 {
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
+    const STATUS_ADMIN_CHECK = 1;
+    const STATUS_ADMIN_PASS = 2;
+    const STATUS_ADMIN_PASS_NOT = 3;
+
     const TYPE_MANAGE = 0;
     const TYPE_TEACHER = 1;
 
@@ -77,7 +81,7 @@ class User extends ActiveRecord implements IdentityInterface
                 'unique',
                 'targetClass' => User::className(),
                 'message' => yii::t('app', 'This telephone has already been taken'),
-                'on'=>['create','signup','update']
+                'on' => ['create', 'signup', 'update']
             ],
             [
                 'username',
@@ -89,13 +93,14 @@ class User extends ActiveRecord implements IdentityInterface
             [['repassword'], 'compare', 'compareAttribute' => 'password'],
             [['avatar'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg, gif, webp'],
             [['status'], 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
-            [['telephone', 'password', 'code' ], 'required', 'on' => ['forget-password']],
+            [['telephone', 'password', 'code'], 'required', 'on' => ['forget-password']],
             [['username', 'telephone', 'password', 'repassword'], 'required', 'on' => ['create']],
-            [['username', 'password','code', 'telephone'], 'required', 'on' => ['signup']],
-            [['username', 'code','telephone'], 'required', 'on' => ['update', 'self-update']],
+            [['username', 'password', 'code', 'telephone'], 'required', 'on' => ['signup']],
+            [['username', 'code', 'telephone'], 'required', 'on' => ['update']],
             [['username'], 'unique', 'on' => 'create'],
-            [['roles', 'permissions', 'sign', 'introduce', 'nickname', 'district'], 'safe'],
-            ['code', 'checkCode' ],
+            [['roles', 'permissions', 'sign', 'introduce', 'admin_status','reason', 'nickname', 'district'], 'safe'],
+            ['code', 'checkCode'],
+            [['telephone', 'realname', 'card_number', 'bank', 'bank_account', 'current_address'], 'required', 'on' => 'self-update'],
         ];
     }
 
@@ -108,9 +113,24 @@ class User extends ActiveRecord implements IdentityInterface
             'default' => ['username', 'email'],
             'create' => ['username', 'telephone', 'password', 'avatar', 'status', 'roles', 'permissions'],
             'forget-password' => ['telephone', 'password', 'code'],
-            'signup' => ['username', 'telephone', 'code','password', 'avatar', 'status', 'roles', 'permissions', 'district'],
+            'signup' => ['username', 'telephone', 'code', 'password', 'avatar', 'status', 'roles', 'permissions', 'district'],
             'update' => ['username', 'email', 'password', 'sign', 'introduce', 'avatar', 'status', 'roles', 'permissions'],
-            'self-update' => ['username', 'telephone', 'sign', 'introduce', 'nickname', 'password', 'avatar', 'district', 'old_password', 'repassword'],
+            'self-update' => [
+                'username', 'telephone', 'sign',
+                'introduce', 'nickname', 'realname',
+                'card_number', 'bank', 'bank_account',
+                'card_img', 'current_address', 'certificate', 'avatar',
+            ],
+            'change-not-important' => [
+                'telephone', 'sign',
+                'introduce', 'nickname', 'current_address', 'avatar',
+            ],
+            'change-important' => [
+                'realname', 'card_number', 'card_img', 'bank', 'bank_account', 'certificate','admin_status',
+            ],
+            'change-password' => ['password', 'old_password', 'repassword'
+            ],
+            'check' => ['password', 'admin_status', 'reason'],
         ];
     }
 
@@ -123,6 +143,7 @@ class User extends ActiveRecord implements IdentityInterface
             }
         }
     }
+
     /**
      * @inheritdoc
      */
@@ -130,6 +151,13 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             'username' => yii::t('app', 'Username'),
+            'realname' => yii::t('app', '真实姓名'),
+            'card_number' => yii::t('app', '身份证件号码'),
+            'bank' => yii::t('app', '开户银行'),
+            'bank_account' => yii::t('app', '开户银行账号'),
+            'card_img' => yii::t('app', '身份证件凭证'),
+            'current_address' => yii::t('app', '常居地址'),
+            'certificate' => yii::t('app', '专业凭证'),
             'nickname' => yii::t('app', 'Nickname'),
             'sign' => yii::t('app', 'Person Sign'),
             'code' => yii::t('app', '验证码'),
@@ -141,8 +169,10 @@ class User extends ActiveRecord implements IdentityInterface
             'repassword' => yii::t('app', 'Repeat Password'),
             'avatar' => yii::t('app', 'Avatar'),
             'status' => yii::t('app', 'Status'),
+            'admin_status' => yii::t('app', 'Status'),
             'created_at' => yii::t('app', 'Created At'),
-            'updated_at' => yii::t('app', 'Updated At')
+            'updated_at' => yii::t('app', 'Updated At'),
+            'reason' => yii::t('app', '原因')
         ];
     }
 
@@ -161,6 +191,15 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             self::STATUS_ACTIVE => yii::t('app', 'Normal'),
             self::STATUS_DELETED => yii::t('app', 'Disabled'),
+        ];
+    }
+
+    public static function getAdminStatuses()
+    {
+        return [
+            self::STATUS_ADMIN_CHECK => yii::t('app', '待审核'),
+            self::STATUS_ADMIN_PASS => yii::t('app', '通过'),
+            self::STATUS_ADMIN_PASS_NOT => yii::t('app', '拒绝'),
         ];
     }
 
@@ -188,7 +227,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findByUsername($username)
     {
-        return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
+        return static::findOne(['username' => $username, 'status' => AdminUser::STATUS_ACTIVE]);
     }
 
     /**
@@ -301,6 +340,8 @@ class User extends ActiveRecord implements IdentityInterface
     public function beforeSave($insert)
     {
         Util::handleModelSingleFileUpload($this, 'avatar', $insert, '@admin/uploads/avatar/');
+        Util::handleModelSingleFileUpload($this, 'card_img', $insert, '@admin/uploads/card_img/');
+        Util::handleModelSingleFileUpload($this, 'certificate', $insert, '@admin/uploads/certificate/');
         if ($insert) {
             $this->generateAuthKey();
             $this->setPassword($this->password);
@@ -311,6 +352,26 @@ class User extends ActiveRecord implements IdentityInterface
             }
         }
         return parent::beforeSave($insert);
+    }
+
+    public function afterFind()
+    {
+        parent::afterFind();
+        if ($this->avatar) {
+            /** @var TargetAbstract $cdn */
+            $cdn = yii::$app->get('cdn');
+            $this->avatar = $cdn->getCdnUrl($this->avatar);
+        }
+        if ($this->card_img) {
+            /** @var TargetAbstract $cdn */
+            $cdn = yii::$app->get('cdn');
+            $this->card_img = $cdn->getCdnUrl($this->card_img);
+        }
+        if ($this->certificate) {
+            /** @var TargetAbstract $cdn */
+            $cdn = yii::$app->get('cdn');
+            $this->certificate = $cdn->getCdnUrl($this->certificate);
+        }
     }
 
 
@@ -403,6 +464,23 @@ class User extends ActiveRecord implements IdentityInterface
                 $this->addError('repassword', yii::t('app', '{attribute} is incorrect.', ['attribute' => yii::t('app', 'Repeat Password')]));
                 return false;
             }
+        }
+        return $this->save();
+    }
+
+    public function changePassword()
+    {
+        if ($this->old_password == '') {
+            $this->addError('old_password', yii::t('yii', '{attribute} cannot be blank.', ['attribute' => yii::t('app', 'Old Password')]));
+            return false;
+        }
+        if (!$this->validatePassword($this->old_password)) {
+            $this->addError('old_password', yii::t('app', '{attribute} is incorrect.', ['attribute' => yii::t('app', 'Old Password')]));
+            return false;
+        }
+        if ($this->repassword != $this->password) {
+            $this->addError('repassword', yii::t('app', '{attribute} is incorrect.', ['attribute' => yii::t('app', 'Repeat Password')]));
+            return false;
         }
         return $this->save();
     }

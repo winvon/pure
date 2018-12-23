@@ -21,7 +21,7 @@ use common\models\Options;
 use yii\data\ActiveDataProvider;
 use yii\data\ArrayDataProvider;
 
-class BannerController extends \yii\web\Controller
+class BannerController extends BackendController
 {
 
     public function actions()

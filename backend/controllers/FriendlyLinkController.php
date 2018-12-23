@@ -21,7 +21,7 @@ use backend\actions\SortAction;
 /**
  * FriendLink controller
  */
-class FriendlyLinkController extends \yii\web\Controller
+class FriendlyLinkController extends BackendController
 {
 
     public function actions()

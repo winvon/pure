@@ -8,7 +8,8 @@
 
 namespace backend\controllers;
 
-use backend\models\form\SignUpForm;
+
+use backend\models\AdminUser;
 use yii;
 use backend\models\form\PasswordResetRequestForm;
 use backend\models\form\ResetPasswordForm;
@@ -21,7 +22,7 @@ use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
 use backend\actions\ViewAction;
 
-class AdminUserController extends \yii\web\Controller
+class AdminUserController extends BackendController
 {
 
     public function actions()
@@ -39,6 +40,10 @@ class AdminUserController extends \yii\web\Controller
                 }
             ],
             'view-layer' => [
+                'class' => ViewAction::className(),
+                'modelClass' => User::className(),
+            ],
+            'view' => [
                 'class' => ViewAction::className(),
                 'modelClass' => User::className(),
             ],
@@ -63,7 +68,7 @@ class AdminUserController extends \yii\web\Controller
         $model = new User();
         $model->setScenario('create');
         if (yii::$app->getRequest()->getIsPost()) {
-            if ($model->load(Yii::$app->getRequest()->post()) && $model->save() && $model->assignPermission()) {
+            if ($model->load(Yii::$app->getRequest()->post()) && $model->save()) {
                 Yii::$app->getSession()->setFlash('success', yii::t('app', 'Success'));
                 return $this->redirect(['index']);
             } else {
@@ -106,6 +111,35 @@ class AdminUserController extends \yii\web\Controller
     }
 
     /**
+     * 审核
+     *
+     * @param $id
+     * @return string|\yii\web\Response
+     */
+    public function actionCheck($id)
+    {
+        $model = User::findOne($id);
+        $model->setScenario('check');
+        if (Yii::$app->getRequest()->getIsPost()) {
+            if ($model->load(Yii::$app->request->post()) && $model->save() ) {
+                Yii::$app->getSession()->setFlash('success', yii::t('app', 'Success'));
+                return $this->redirect(['check', 'id' => $model->getPrimaryKey()]);
+            } else {
+                $errors = $model->getErrors();
+                $err = '';
+                foreach ($errors as $v) {
+                    $err .= $v[0] . '<br>';
+                }
+                Yii::$app->getSession()->setFlash('error', $err);
+            }
+            $model = User::findOne(['id' => yii::$app->getUser()->getIdentity()->getId()]);
+        }
+        return $this->render('check', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
      * 修改管理员账号
      *
      * @param $id
@@ -115,15 +149,8 @@ class AdminUserController extends \yii\web\Controller
     {
         $model = User::findOne($id);
         $model->setScenario('update');
-        $model->roles = $model->permissions = call_user_func(function () use ($id) {
-            $permissions = yii::$app->getAuthManager()->getAssignments($id);
-            foreach ($permissions as $k => &$v) {
-                $v = $k;
-            }
-            return $permissions;
-        });
         if (Yii::$app->getRequest()->getIsPost()) {
-            if ($model->load(Yii::$app->request->post()) && $model->save() && $model->assignPermission()) {
+            if ($model->load(Yii::$app->request->post()) && $model->save() ) {
                 Yii::$app->getSession()->setFlash('success', yii::t('app', 'Success'));
                 return $this->redirect(['update', 'id' => $model->getPrimaryKey()]);
             } else {
@@ -136,7 +163,6 @@ class AdminUserController extends \yii\web\Controller
             }
             $model = User::findOne(['id' => yii::$app->getUser()->getIdentity()->getId()]);
         }
-
         return $this->render('update', [
             'model' => $model,
         ]);
@@ -166,6 +192,74 @@ class AdminUserController extends \yii\web\Controller
         }
 
         return $this->render('update', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionChangeImportant()
+    {
+        $model = User::findOne(['id' => yii::$app->getUser()->getIdentity()->getId()]);
+        $model->setScenario('change-important');
+        if (yii::$app->getRequest()->getIsPost()) {
+            if ($model->load(yii::$app->getRequest()->post())) {
+                $model->admin_status=AdminUser::STATUS_ADMIN_CHECK;
+                $model->save();
+                Yii::$app->getSession()->setFlash('success', yii::t('app', 'Success'));
+            } else {
+                $errors = $model->getErrors();
+                $err = '';
+                foreach ($errors as $v) {
+                    $err .= $v[0] . '<br>';
+                }
+                Yii::$app->getSession()->setFlash('error', $err);
+            }
+            $model = User::findOne(['id' => yii::$app->getUser()->getIdentity()->getId()]);
+        }
+        return $this->render('change-important', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionChangePassword()
+    {
+        $model = User::findOne(['id' => yii::$app->getUser()->getIdentity()->getId()]);
+        $model->setScenario('change-password');
+        if (yii::$app->getRequest()->getIsPost()) {
+            if ($model->load(yii::$app->getRequest()->post()) && $model->changePassword()) {
+                Yii::$app->getSession()->setFlash('success', yii::t('app', 'Success'));
+            } else {
+                $errors = $model->getErrors();
+                $err = '';
+                foreach ($errors as $v) {
+                    $err .= $v[0] . '<br>';
+                }
+                Yii::$app->getSession()->setFlash('error', $err);
+            }
+            $model = User::findOne(['id' => yii::$app->getUser()->getIdentity()->getId()]);
+        }
+        return $this->render('change-password', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionChangeNotImportant()
+    {
+        $model = User::findOne(['id' => yii::$app->getUser()->getIdentity()->getId()]);
+        $model->setScenario('change-not-important');
+        if (yii::$app->getRequest()->getIsPost()) {
+            if ($model->load(yii::$app->getRequest()->post()) && $model->selfUpdate()) {
+                Yii::$app->getSession()->setFlash('success', yii::t('app', 'Success'));
+            } else {
+                $errors = $model->getErrors();
+                $err = '';
+                foreach ($errors as $v) {
+                    $err .= $v[0] . '<br>';
+                }
+                Yii::$app->getSession()->setFlash('error', $err);
+            }
+            $model = User::findOne(['id' => yii::$app->getUser()->getIdentity()->getId()]);
+        }
+        return $this->render('change-not-important', [
             'model' => $model,
         ]);
     }

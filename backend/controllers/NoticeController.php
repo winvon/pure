@@ -14,7 +14,7 @@ use backend\actions\SortAction;
 /**
  * NoticeController implements the CRUD actions for Notice model.
  */
-class NoticeController extends \yii\web\Controller
+class NoticeController extends BackendController
 {
     public function actions()
     {

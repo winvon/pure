@@ -17,7 +17,7 @@ use backend\actions\IndexAction;
 use backend\actions\DeleteAction;
 use backend\actions\SortAction;
 
-class CategoryController extends \yii\web\Controller
+class CategoryController extends BackendController
 {
 
     public function actions()

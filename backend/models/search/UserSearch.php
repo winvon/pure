@@ -36,7 +36,7 @@ class UserSearch extends \backend\models\User
     public function rules()
     {
         return [
-            [['username', 'email', 'created_at', 'updated_at','nickname'], 'string'],
+            [['username', 'email', 'created_at','realname', 'updated_at','telephone','nickname'], 'string'],
             ['status', 'integer'],
         ];
     }
@@ -53,7 +53,7 @@ class UserSearch extends \backend\models\User
     public function search($params)
     {
         $query = self::find()
-        ->where(["<>","id",1]);
+        ->where(["NOT IN","id",[1,2]]);
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort' => [
@@ -69,12 +69,13 @@ class UserSearch extends \backend\models\User
             return $dataProvider;
         }
         $query->andFilterWhere(['like', 'username', $this->username])
+            ->andFilterWhere(['like', 'realname', $this->realname])
             ->andFilterWhere(['like', 'nickname', $this->nickname])
+            ->andFilterWhere(['like', 'telephone', $this->telephone])
             ->andFilterWhere(['like', 'email', $this->email])
             ->andFilterWhere(['status' => $this->status]);
 
         $this->trigger(SearchEvent::BEFORE_SEARCH, new SearchEvent(['query'=>$query]));
         return $dataProvider;
     }
-
 }

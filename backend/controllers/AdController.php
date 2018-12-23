@@ -17,7 +17,7 @@ use backend\actions\DeleteAction;
 use backend\actions\SortAction;
 use yii\data\ActiveDataProvider;
 
-class AdController extends \yii\web\Controller
+class AdController extends BackendController
 {
     public function actions()
     {

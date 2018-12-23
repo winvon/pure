@@ -18,7 +18,7 @@ use backend\actions\ViewAction;
 use backend\actions\DeleteAction;
 use backend\actions\SortAction;
 
-class PageController extends \yii\web\Controller
+class PageController extends BackendController
 {
 
     public function actions()

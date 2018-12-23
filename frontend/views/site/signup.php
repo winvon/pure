@@ -53,6 +53,10 @@ $this->params['breadcrumbs'][] = $this->title;
     .intl-tel-input .country-list{
         z-index: 100;
     }
+    .input-span{
+        font-size: 12px;
+        color: grey;
+    }
 </style>
 <div class="content-wrap">
     <div class="login-box">
@@ -81,14 +85,14 @@ $this->params['breadcrumbs'][] = $this->title;
             ]);
         ?>
         <?= $form->field($model, 'username', [
-            'template' => "<label class='layui-form-label'><i class='layui-icon layui-icon-username'></i></label>{input}{error}{hint}"])->textInput(['autofocus' => true]) ?>
+            'template' => "<label class='layui-form-label'><i class='layui-icon layui-icon-username'></i></label>{input}{error}{hint}<span class='input-span'>用户名可由中文、英文或数字组成</span>"])->textInput(['autofocus' => true]) ?>
 
         <?= $form->field($model, 'password', [
-            'template' => '<label class="layui-form-label"><i class="layui-icon layui-icon-password"></i></label>{input}{error}{hint}'
+            'template' => '<label class="layui-form-label"><i class="layui-icon layui-icon-password"></i></label>{input}{error}{hint}<span class=\'input-span\'>密码长度大于6位,建议有英文和数字组成</span>'
         ])->passwordInput() ?>
 
         <?= $form->field($model, 'telephone', [
-            'template' => '<label class="layui-form-label"><i class="layui-icon layui-icon-cellphone"></i></label>{input}{error}{hint}'
+            'template' => '<label class="layui-form-label"><i class="layui-icon layui-icon-cellphone"></i></label>{input}{error}{hint}<span class=\'input-span\'>请先选择手机号所在地区</span>'
         ])->textInput(['type'=>'tel']) ?>
 
         <?= $form->field($model, 'code', [
@@ -125,24 +129,38 @@ $this->params['breadcrumbs'][] = $this->title;
     function getCode(obj) {
 //        var exten=$(".selected-flag")[0].title.split(":")[1].trim();
         if (checkPhone() == true) {//验证手机号码
+            $.ajaxSetup({
+                async : false //取消异步
+            });
             if (jishi == 1) {
-                $.ajax({
-                    type: "POST",
-                    url: '<?=Url::to(['public/send-mobile-code'])?>',
-                    data: {telephone:$("input[name='SignupForm[telephone]']").val(),district:$(".selected-flag")[0].title},
-                    success: function (result) {
-                        if (result != true) {
-
-                        }
-                        else {
-
-                        }
-                    },
-                    error: function (result) {
-
+                $.post('<?=Url::to(['public/send-mobile-code'])?>',{telephone:$("input[name='SignupForm[telephone]']").val(),district:$(".selected-flag")[0].title},function (data) {
+                    console.log(data);
+                    if (data==false){
+                        layer.msg('验证码发送失败');
+                    }else {
+                        settime(obj);//倒计时
                     }
                 });
-                settime(obj);//倒计时
+
+//                $.ajax({
+//                    type: "POST",
+//                    url: '<?//=Url::to(['public/send-mobile-code'])?>//',
+//                    data: {telephone:$("input[name='SignupForm[telephone]']").val(),district:$(".selected-flag")[0].title},
+//                    success: function (result) {
+//                            console.log(result);
+//
+//                        if (result != true) {
+//
+//                        }
+//                        else {
+//
+//                        }
+//                    },
+//                    error: function (result) {
+//
+//                    }
+//                });
+//                settime(obj);//倒计时
             }
         }
         else {

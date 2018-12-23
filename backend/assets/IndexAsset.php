@@ -12,7 +12,7 @@ use yii;
 
 class IndexAsset extends \yii\web\AssetBundle
 {
-
+    public $jsOptions = ['position' => \yii\web\View::POS_HEAD];
     public $css = [
         'static/css/bootstrap.min.css',
         'static/css/font-awesome.min93e3.css?v=4.4.0',

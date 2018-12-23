@@ -17,7 +17,7 @@ use backend\models\search\CommentSearch;
 use backend\actions\IndexAction;
 use backend\actions\DeleteAction;
 
-class CommentController extends \yii\web\Controller
+class CommentController extends BackendController
 {
 
     public function actions()

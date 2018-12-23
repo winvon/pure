@@ -15,7 +15,7 @@ use yii\web\MethodNotAllowedHttpException;
 use yii\web\Response;
 use yii\web\UnprocessableEntityHttpException;
 
-class RbacController extends \yii\web\Controller
+class RbacController extends BackendController
 {
     public function actionPermissions()
     {

@@ -10,10 +10,8 @@ namespace frontend\controllers;
 
 
 use common\components\Common;
-use common\components\Telephone;
 use yii\web\Controller;
 use Yii;
-use yii\web\BadRequestHttpException;
 
 class PublicController extends Controller
 {
@@ -32,7 +30,9 @@ class PublicController extends Controller
 
     public function actionSendMobileCode()
     {
-        Common::sendRegisterCode();
+        if (!Common::sendRegisterCode()) {
+            return false;
+        }
         return true;
     }
 

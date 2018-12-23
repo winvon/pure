@@ -15,7 +15,7 @@ use backend\actions\IndexAction;
 use backend\actions\ViewAction;
 use backend\actions\DeleteAction;
 
-class LogController extends \yii\web\Controller
+class LogController extends BackendController
 {
 
     public function actions()

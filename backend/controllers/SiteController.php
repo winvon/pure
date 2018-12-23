@@ -27,7 +27,7 @@ use yii\captcha\CaptchaAction;
 /**
  * Site controller
  */
-class SiteController extends \yii\web\Controller
+class SiteController extends BackendController
 {
     public function behaviors()
     {
@@ -234,7 +234,7 @@ class SiteController extends \yii\web\Controller
     {
         Yii::$app->getUser()->logout(false);
 
-        return $this->goHome();
+        return $this->redirect('site/login');
     }
 
 

@@ -13,7 +13,7 @@ use backend\actions\SortAction;
 /**
  * OrderController implements the CRUD actions for Order model.
  */
-class OrderController extends \yii\web\Controller
+class OrderController extends BackendController
 {
     public function actions()
     {

@@ -10,7 +10,7 @@ namespace backend\controllers;
 
 use backend\widgets\ueditor\UeditorAction;
 
-class AssetsController extends \yii\web\Controller
+class AssetsController extends BackendController
 {
 
     public function actions()

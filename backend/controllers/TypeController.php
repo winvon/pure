@@ -10,25 +10,26 @@ use backend\actions\UpdateAction;
 use backend\actions\IndexAction;
 use backend\actions\DeleteAction;
 use backend\actions\SortAction;
+
 /**
  * TypeController implements the CRUD actions for Type model.
  */
-class TypeController extends \yii\web\Controller
+class TypeController extends BackendController
 {
     public function actions()
     {
         return [
             'index' => [
                 'class' => IndexAction::className(),
-                'data' => function(){
-                    
-                        $searchModel = new TypeSearch();
-                        $dataProvider = $searchModel->search(yii::$app->getRequest()->getQueryParams());
-                        return [
-                            'dataProvider' => $dataProvider,
-                            'searchModel' => $searchModel,
-                        ];
-                    
+                'data' => function () {
+
+                    $searchModel = new TypeSearch();
+                    $dataProvider = $searchModel->search(yii::$app->getRequest()->getQueryParams());
+                    return [
+                        'dataProvider' => $dataProvider,
+                        'searchModel' => $searchModel,
+                    ];
+
                 }
             ],
             'create' => [

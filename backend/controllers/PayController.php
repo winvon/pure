@@ -14,7 +14,7 @@ use backend\actions\SortAction;
 /**
  * PayController implements the CRUD actions for Pay model.
  */
-class PayController extends \yii\web\Controller
+class PayController extends BackendController
 {
     public function actions()
     {

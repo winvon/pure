@@ -22,7 +22,9 @@ class Common
         Common::$_district=$district;
         $telephone = $district . (string)$post['telephone'];
         $cache = Yii::$app->cache;
-        self::sendCode($telephone);
+        if (!self::sendCode($telephone)) {
+            return false;
+        }
         $cache->set($post['telephone'] . 'district', $post['district'], 60 * 60 * 24);
         return true;
     }
@@ -41,7 +43,9 @@ class Common
     {
         $code = rand(1000, 9999);
         $post = Yii::$app->request->post();
-        Telephone::send($telephone,$code);
+        if (!Telephone::send($telephone,$code)) {
+            return false;
+        }
         $cache = Yii::$app->cache;
         $cache->set($post['telephone'], $code, 60 * 20);//20分钟；
         return true;

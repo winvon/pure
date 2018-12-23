@@ -62,6 +62,12 @@ $this->params['breadcrumbs'][] = $this->title;
         .intl-tel-input .country-list {
             z-index: 100;
         }
+        .input-span{
+             font-size: 12px;
+             color: grey;
+             display: inline-block;
+             float: left;
+         }
     </style>
 </head>
 <body class="gray-bg">
@@ -85,14 +91,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]
             ],]);?>
         <?= $form->field($model, 'username',
-            ['template' => "<div style='position:relative'>{input} {error} {hint}</div>"])
+            ['template' => "<div style='position:relative'>{input} {error} {hint}<span class='input-span'>用户名可由中文、英文或数字组成</span></div>"])
             ->textInput(['autofocus' => true, 'placeholder' => yii::t("app", "Username")]) ?>
 
-        <?= $form->field($model, 'password', ['template' => "<div style='position:relative'>{input} {error} {hint}</div>"])
+        <?= $form->field($model, 'password', ['template' => "<div style='position:relative'>{input} {error} {hint}<span class='input-span'>密码长度大于6位,建议有英文和数字组成</span></div>"])
             ->passwordInput(['placeholder' => yii::t("app", "Password")]) ?>
 
         <?= $form->field($model, 'telephone', [
-            'template' => "<div style='position:relative'>{input} {error} {hint}</div>",
+            'template' => "<div style='position:relative'>{input} {error} {hint}<span class='input-span'>请先选择手机号所在地区</span></div>",
         ])->textInput(['placeholder' => yii::t("app", "Telephone"),'style'=>'width:300px;height:38px']) ?>
 
         <?= $form->field($model, 'code', ['template' => "<div style='position:relative' class='form-group'><div  class='input-group'>{input}<a class='input-group-addon getcode'>获取验证码</a>\n{error}\n{hint}</div></div>"])

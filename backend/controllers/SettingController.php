@@ -24,7 +24,7 @@ use yii\web\UnprocessableEntityHttpException;
 /**
  * Setting controller
  */
-class SettingController extends \yii\web\Controller
+class SettingController extends BackendController
 {
 
     public function actions()

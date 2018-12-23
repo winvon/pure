@@ -15,7 +15,7 @@ use yii\helpers\Html;
 use backend\models\Menu;
 use yii\helpers\Url;
 use backend\assets\IndexAsset;
-
+use backend\models\AdminUser;
 IndexAsset::register($this);
 $this->title = yii::t('app', 'Backend Manage System');
 ?>
@@ -60,14 +60,21 @@ $this->title = yii::t('app', 'Backend Manage System');
                         </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
                             <li><a class="J_menuItem"
-                                   href="<?= Url::to(['admin-user/update-self']) ?>"><?= yii::t('app', 'Profile') ?></a>
+                                   href="<?= Url::to(['admin-user/view', 'id' => yii::$app->getUser()->id]) ?>"><?= yii::t('app', 'Profile') ?></a>
                             </li>
                             <li><a class="J_menuItem"
-                                   href="<?= Url::to(['article/index']) ?>"><?= yii::t('app', 'Articles') ?></a></li>
-                            <li><a target="_blank"
-                                   href="<?= yii::$app->params['site']['url'] ?>"><?= yii::t('app', 'Frontend') ?></a>
+                                   href="<?= Url::to(['admin-user/change-password']) ?>"><?= yii::t('app', '修改密码') ?></a>
                             </li>
-                            <li class="divider"></li>
+                            <?php  if (yii::$app->user->identity->type==AdminUser::TYPE_TEACHER) {
+                                ; ?>
+                                <li><a class="J_menuItem"
+                                       href="<?= Url::to(['admin-user/change-not-important']) ?>"><?= yii::t('app', '修改个人资料') ?></a>
+                                </li>
+                                <li><a class="J_menuItem"
+                                       href="<?= Url::to(['admin-user/change-important']) ?>"><?= yii::t('app', '修改重要资料') ?></a>
+                                </li>
+                                <li class="divider"></li>
+                            <?php } ?>
                             <li><a data-method="post"
                                    href="<?= Url::toRoute('site/logout') ?>"><?= yii::t('app', 'Logout') ?></a></li>
                         </ul>
@@ -128,9 +135,16 @@ $this->title = yii::t('app', 'Backend Manage System');
             </button>
             <nav class="page-tabs J_menuTabs">
                 <div class="page-tabs-content">
-                    <a href="javascript:;" class="active J_menuTab"
-                       data-id="<?= Url::to(['site/main']) ?>"><?= yii::t('app', 'Home') ?></a>
+                    <?php if (1 == 1) { ?>
+                        <a href="javascript:;" class="active J_menuTab"
+                           data-id="<?= Url::to(['site/main']) ?>"><?= yii::t('app', 'Home') ?></a>
+                    <?php } else { ?>
+                        <a href="javascript:;" class="active J_menuTab" data-id="/admin-user/change-important">完善资料<i
+                                    class="fa fa-times-circle"></i></a>
+                    <?php } ?>
+
                 </div>
+
             </nav>
             <button class="roll-nav roll-right J_tabRight"><i class="fa fa-forward"></i></button>
             <div class="btn-group roll-nav roll-right">
@@ -146,8 +160,14 @@ $this->title = yii::t('app', 'Backend Manage System');
             <?= Html::a('<i class="fa fa fa-sign-out"></i>' . yii::t('app', 'Logout'), Url::toRoute('site/logout'), ['data-method' => 'post', 'class' => 'roll-nav roll-right J_tabExit']) ?>
         </div>
         <div class="row J_mainContent" id="content-main">
-            <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="<?= Url::to(['site/main']) ?>"
-                    frameborder="0" data-id="<?= Url::to(['site/main']) ?>" seamless></iframe>
+            <?php if (Yii::$app->user->identity->type==AdminUser::TYPE_TEACHER &&Yii::$app->user->identity->admin_status!= AdminUser::STATUS_ADMIN_PASS) {
+                $url = 'admin-user/change-important';
+            } else {
+                $url = 'site/main';
+            }
+            ?>
+            <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="<?= Url::to([$url]) ?>"
+                    frameborder="0" data-id="<?= Url::to([$url]) ?>" seamless></iframe>
         </div>
         <div class="footer">
             <div class="pull-right">&copy; 2015-<?= date('Y') ?> <a href="http://blog.feehi.com/"

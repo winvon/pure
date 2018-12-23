@@ -16,6 +16,7 @@ use backend\widgets\ActiveForm;
 use backend\models\User;
 use common\widgets\JsBlock;
 use yii\helpers\Html;
+use backend\models\AdminUser;
 
 $this->title = "Admin";
 ?>
@@ -30,48 +31,29 @@ $this->title = "Admin";
                             'class' => 'form-horizontal'
                         ]
                     ]); ?>
-                    <?= $form->field($model, 'username')->textInput(['maxlength' => 64, 'readonly' => true,]) ?>
+                    <?= $form->field($model, 'username')->textInput(['maxlength' => 64, 'readonly' => 'true',]) ?>
                     <div class="hr-line-dashed"></div>
 
-                    <?= $form->field($model, 'nickname')->textInput(['maxlength' => 64, [
-                        'placeholder' => '前台页面显示的称呼',]]) ?>
-
-                    <?= $form->field($model, 'realname')->textInput(['maxlength' => 64, 'readonly' => true, [
+                    <?= $form->field($model, 'realname')->textInput(['maxlength' => 64, [
                         'placeholder' => '真实姓名',]]) ?>
-                    <?= $form->field($model, 'avatar')->imgInput([
-                        'readonly' => 'true',
-                        'width' => '200px',
-                        'baseUrl' => yii::$app->params['admin']['url']
-                    ]) ?>
-                    <div class="hr-line-dashed"></div>
-                    <?= $form->field($model, 'telephone')->textInput(['maxlength' => 64]) ?>
-                    <?= $form->field($model, 'card_number')->textInput(['maxlength' => 64,'readonly' => 'true', [
+                    <?= $form->field($model, 'card_number')->textInput(['maxlength' => 64, [
                         'placeholder' => '身份证件号码',]]) ?>
                     <?= $form->field($model, 'card_img')->imgInput([
                         'value' => $model->card_img,
                         'width' => '150px',
                         'baseUrl' => yii::$app->params['admin']['url'],
                     ]) ?>
-                    <?= $form->field($model, 'current_address')->textInput(['maxlength' => 64, 'readonly' => 'true', [
-                        'placeholder' => '当前住居地址,以收取邮件',]]) ?>
                     <?= $form->field($model, 'certificate')->imgInput([
 
                         'readonly' => 'true',
                         'width' => '150px',
                         'baseUrl' => yii::$app->params['admin']['url'],
                     ]) ?>
-                    <?= $form->field($model, 'bank')->textInput(['maxlength' => 64,'readonly' => 'true', [
+                    <?= $form->field($model, 'bank')->textInput(['maxlength' => 64, [
                         'placeholder' => '收款银行',]]) ?>
-                    <?= $form->field($model, 'bank_account')->textInput(['maxlength' => 64,'readonly' => 'true', [
+                    <?= $form->field($model, 'bank_account')->textInput(['maxlength' => 64, [
                         'placeholder' => '收款账号',]]) ?>
 
-                    <?= $form->field($model, 'introduce')->textArea([
-                        'style' => 'height:150px',
-                        'placeholder' => '自我介绍一下吧!',
-                    ]) ?>
-                    <?= $form->field($model, 'password')->passwordInput(['maxlength' => 512]) ?>
-                    <div class="hr-line-dashed"></div>
-                    <?= $form->field($model, 'admin_status')->radioList(User::getAdminStatuses()) ?>
                     <div class="hr-line-dashed"></div>
                     <?= $form->defaultButtons() ?>
                     <?php ActiveForm::end(); ?>
@@ -81,7 +63,19 @@ $this->title = "Admin";
     </div>
 <?php JsBlock::begin() ?>
     <script>
+        <?php
+        if (Yii::$app->user->identity->type == AdminUser::TYPE_TEACHER) {
+            if (Yii::$app->user->identity->admin_status == AdminUser::STATUS_ADMIN_PASS) {
+                echo "layer.msg('修改资料成功后，系统功能将暂停使用，待管理员审核后资料成功后开启！',{time:5000})";
+            }
+            if (Yii::$app->user->identity->admin_status == AdminUser::STATUS_ADMIN_CHECK) {
+                echo "layer.msg('请点击头像下方用户名，完善个人资料和重要资料',{time:5000})";
+            }
+        }
+        ?>
+
         $(document).ready(function () {
+
             var isSuperAdmin = <?php if (in_array($model->getId(), yii::$app->getBehavior('access')->superAdminUserIds)) {
                 echo 1;
             } else {

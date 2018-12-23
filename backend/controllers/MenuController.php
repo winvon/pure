@@ -21,7 +21,7 @@ use backend\actions\SortAction;
 /**
  * Menu controller
  */
-class MenuController extends \yii\web\Controller
+class MenuController extends BackendController
 {
 
     public function actions()

@@ -13,7 +13,7 @@ use backend\actions\SortAction;
 /**
  * AdvisorTypeController implements the CRUD actions for AdvisorType model.
  */
-class AdvisorTypeController extends \yii\web\Controller
+class AdvisorTypeController extends BackendController
 {
     public function actions()
     {
