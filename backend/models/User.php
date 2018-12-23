@@ -81,7 +81,7 @@ class User extends ActiveRecord implements IdentityInterface
                 'unique',
                 'targetClass' => User::className(),
                 'message' => yii::t('app', 'This telephone has already been taken'),
-                'on' => ['create', 'signup', 'update']
+                'on' => ['create', 'signup', 'update','change-not-important']
             ],
             [
                 'username',
