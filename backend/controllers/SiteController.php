@@ -82,8 +82,8 @@ class SiteController extends BackendController
     {
         $cach=Yii::$app->cache;
         $tishi=$cach->get('tishi');
-        if (Yii::$app->user->identity->type == AdminUser::TYPE_TEACHER &&empty($tishi)) {
-            $cach->set('tishi',1);
+        if (Yii::$app->user->identity->type == AdminUser::TYPE_TEACHER &&$this!=Yii::$app->user->id) {
+            $cach->set('tishi',Yii::$app->user->id,6*60*60);
             if (Yii::$app->user->identity->admin_status == AdminUser::STATUS_ADMIN_PASS_NOT) {
                 Yii::$app->session->setFlash('error','资料审核失败，请到\'个人资料\'查看失败原因');
             }
