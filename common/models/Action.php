@@ -42,7 +42,7 @@ class Action extends \yii\db\ActiveRecord
             [['num'], 'string', 'max' => 50],
             ['email', 'email'],
             [['name', 'email', 'mobile'], 'string', 'max' => 255],
-            [['common', 'reason','num'], 'safe'],
+            [['comment', 'reason','num'], 'safe'],
         ];
     }
 
