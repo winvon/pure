@@ -7,7 +7,7 @@
  */
 use common\widgets\JsBlock;
 use yii\helpers\Url;
-
+use backend\models\AdminUser;
 /**
  * @var $statics array
  */
@@ -79,7 +79,6 @@ use yii\helpers\Url;
                             .list-group-item > .badge {
                                 float: left
                             }
-
                             li.list-group-item strong {
                                 margin-left: 15px;
                             }
@@ -220,7 +219,6 @@ use yii\helpers\Url;
 //    $('.ibox-content').on('click', function () {
 //        $('.animated').prop('display', 'none')
 //    });/+/
-
     $(document).ready(function () {
         $.ajax({
             dataType: "jsonp",

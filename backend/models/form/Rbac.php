@@ -85,6 +85,7 @@ class Rbac extends yii\base\Model
         ];
     }
 
+
     public function createPermission()
     {
         $this->name = $this->route . ':' . $this->method;
@@ -101,7 +102,7 @@ class Rbac extends yii\base\Model
             'sort' => $this->sort,
             'category' => $this->category,
         ]);
-         if( $authManager->add($permission) ){
+         if( $authManager->add($permission)){
              Event::trigger(CustomLog::className(), CustomLog::EVENT_AFTER_CREATE, new CustomLog([
                  'sender' => $this,
              ]));

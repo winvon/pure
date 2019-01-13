@@ -123,10 +123,6 @@ $this->title = yii::t('app', 'Backend Manage System');
                         <a href="javascript:void(0)" onclick="reloadIframe()"><i
                                     class="fa fa-refresh"></i> <?= yii::t('app', 'Refresh') ?></a>
                     </li>
-                    <li class="dropdown hidden-xs">
-                        <a class="right-sidebar-toggle" aria-expanded="false"><i
-                                    class="fa fa-tasks"></i> <?= yii::t('app', 'Theme') ?></a>
-                    </li>
                 </ul>
             </nav>
         </div>
@@ -135,7 +131,7 @@ $this->title = yii::t('app', 'Backend Manage System');
             </button>
             <nav class="page-tabs J_menuTabs">
                 <div class="page-tabs-content">
-                    <?php if (1 == 1) { ?>
+                    <?php if (Yii::$app->user->getIdentity()->admin_status == \backend\models\User::STATUS_ADMIN_PASS) { ?>
                         <a href="javascript:;" class="active J_menuTab"
                            data-id="<?= Url::to(['site/main']) ?>"><?= yii::t('app', 'Home') ?></a>
                     <?php } else { ?>
@@ -161,7 +157,7 @@ $this->title = yii::t('app', 'Backend Manage System');
         </div>
         <div class="row J_mainContent" id="content-main">
             <?php if (Yii::$app->user->identity->type==AdminUser::TYPE_TEACHER &&Yii::$app->user->identity->admin_status!= AdminUser::STATUS_ADMIN_PASS) {
-                $url = 'admin-user/change-important';
+                $url = 'admin-user/change-important?lo=1';
             } else {
                 $url = 'site/main';
             }
@@ -267,6 +263,7 @@ $this->title = yii::t('app', 'Backend Manage System');
     <?php $this->endBody() ?>
 </body>
 <script>
+
     function reloadIframe() {
         var current_iframe = $("iframe:visible");
         current_iframe[0].contentWindow.location.reload();

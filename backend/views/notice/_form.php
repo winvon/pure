@@ -30,12 +30,13 @@ use backend\widgets\ActiveForm;
                     [
                         'options' => [
                             'placeholder' => '有效时间',
-                            'value' =>$model->deadline_at ,
+                            'value' => $model->deadline_at ,
                         ],
                         'pluginOptions' => [
-                            'format' => 'yyyy-mm-dd HH:ii',
+                            'format' => 'yyyy-mm-dd hh:ii',
                             'todayHighlight' => true
-                        ]]
+                        ]
+                    ]
                 ) ?>
 
                 <div class="hr-line-dashed"></div>

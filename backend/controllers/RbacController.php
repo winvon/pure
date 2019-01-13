@@ -17,6 +17,7 @@ use yii\web\UnprocessableEntityHttpException;
 
 class RbacController extends BackendController
 {
+    
     public function actionPermissions()
     {
         $searchModel = new RbacSearch(['scenario'=>'permission']);

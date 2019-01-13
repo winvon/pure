@@ -53,7 +53,7 @@ class AuthorController extends FrontendController
         $authors = AdminUser::find()
             ->where(['type' => 1])
             ->andWhere(['status' => User::STATUS_ACTIVE])
-//            ->andWhere(['>', 'id', $author_id])
+            ->andWhere(['>', 'id', $author_id])
             ->limit(24)
             ->all();
         $array =[];

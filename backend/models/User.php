@@ -30,6 +30,7 @@ use \yii\web\ForbiddenHttpException;
  * @property string $telephone
  * @property string $auth_key
  * @property string $introduce
+ * @property integer admin_status
  * @property integer $status
  * @property integer $created_at
  * @property integer $updated_at
@@ -349,6 +350,12 @@ class User extends ActiveRecord implements IdentityInterface
         } else {
             if (isset($this->password) && $this->password != '') {
                 $this->setPassword($this->password);
+            }
+        }
+        if ($this->admin_status==self::STATUS_ADMIN_PASS_NOT){
+            if (empty($this->reason)) {
+                $this->addError('reason','审核不通过,拒绝原因必填');
+                return false;
             }
         }
         return parent::beforeSave($insert);

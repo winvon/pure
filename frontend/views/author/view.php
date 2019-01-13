@@ -20,11 +20,13 @@ use common\models\Order;
         font-size: 15px;
         color: #878787;
     }
-
+    .excerpt {
+        background-color: rgba(255,255,255,0.1);
+    }
 </style>
-<div class="content-wrap">
-    <div style="margin-bottom: 20px">
-        <div class="row">
+<div class="content-wrap" style="height: 900px">
+    <div style="margin-bottom: 20px;">
+        <div class="row" style="">
             <div class="col-md-1">
                 <?php $r = \backend\models\User::findOne([$author_id]) ?>
                 <img class=" img-circle"

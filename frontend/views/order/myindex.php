@@ -20,15 +20,63 @@ $this->params['breadcrumbs'][] = 'Orders';
     .cont {
         background-color: lightgray;
     }
+    .row{
+        height:800px;
+        background-color: rgba(255,255,255,0.2);
+    }
+    .layui-table {
+        background-color: rgba(255,255,255,0.0);
+    }
 </style>
-<div class="row" style="height:900px">
+<!--<div id="paypal-button"></div>-->
+<div class="row"  >
     <div class="col-sm-12">
         <h3>我的预约</h3>
         <table id="demo" lay-filter="test"></table>
     </div>
 </div>
 
-<div id="pay-inline">
+<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+<script>
+    paypal.Button.render({
+        // Configure environment
+        env: 'sandbox',
+        client: {
+            sandbox: 'demo_sandbox_client_id',
+            production: 'demo_production_client_id'
+        },
+        // Customize button (optional)
+        locale: 'en_US',
+        style: {
+            size: 'small',
+            color: 'gold',
+            shape: 'pill',
+        },
+
+        // Enable Pay Now checkout flow (optional)
+        commit: true,
+
+        // Set up a payment
+        payment: function(data, actions) {
+            return actions.payment.create({
+                transactions: [{
+                    amount: {
+                        total: '0.01',
+                        currency: 'USD'
+                    }
+                }]
+            });
+        },
+        // Execute the payment
+        onAuthorize: function(data, actions) {
+            return actions.payment.execute().then(function() {
+                // Show a confirmation message to the buyer
+                window.alert('Thank you for your purchase!');
+            });
+        }
+    }, '#paypal-button');
+</script>
+<div id="pay-inline" style="display:none;">
     <div class="row">
         <div class="toCompany">
             <div class="methodname">

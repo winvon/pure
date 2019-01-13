@@ -22,11 +22,11 @@ class Notice extends \common\models\Notice
         $this->content = str_replace(Yii::getAlias('@frontend/web'), '', $this->content);//图片
         if ($insert) {
             $this->id=self::getId();
-            $this->deadline_at=strtotime($this->deadline_at);
             $this->created_at = time();
         } else {
             $this->updated_at = time();
         }
+        $this->deadline_at=strtotime($this->deadline_at);
         return parent::beforeSave($insert);
     }
 

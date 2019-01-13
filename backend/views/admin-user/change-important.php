@@ -68,9 +68,12 @@ $this->title = "Admin";
             if (Yii::$app->user->identity->admin_status == AdminUser::STATUS_ADMIN_PASS) {
                 echo "layer.msg('修改资料成功后，系统功能将暂停使用，待管理员审核后资料成功后开启！',{time:5000})";
             }
-            if (Yii::$app->user->identity->admin_status == AdminUser::STATUS_ADMIN_CHECK) {
-                echo "layer.msg('请点击头像下方用户名，完善个人资料和重要资料',{time:5000})";
+            if (Yii::$app->request->get('lo')==1) {
+                if (Yii::$app->user->identity->admin_status == AdminUser::STATUS_ADMIN_CHECK) {
+                    echo "layer.msg('请点击头像下方用户名，完善个人资料和重要资料',{time:5000})";
+                }
             }
+
         }
         ?>
 

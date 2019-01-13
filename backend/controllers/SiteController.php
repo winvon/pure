@@ -23,12 +23,15 @@ use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\HttpException;
 use yii\captcha\CaptchaAction;
-
+use backend\models\AdminUser;
 /**
  * Site controller
  */
+
 class SiteController extends BackendController
 {
+    public static $tishi=0;
+
     public function behaviors()
     {
         return [
@@ -77,6 +80,14 @@ class SiteController extends BackendController
      */
     public function actionIndex()
     {
+        $cach=Yii::$app->cache;
+        $tishi=$cach->get('tishi');
+        if (Yii::$app->user->identity->type == AdminUser::TYPE_TEACHER &&empty($tishi)) {
+            $cach->set('tishi',1);
+            if (Yii::$app->user->identity->admin_status == AdminUser::STATUS_ADMIN_PASS_NOT) {
+                Yii::$app->session->setFlash('error','资料审核失败，请到\'个人资料\'查看失败原因');
+            }
+        }
         return $this->renderPartial('index');
     }
 

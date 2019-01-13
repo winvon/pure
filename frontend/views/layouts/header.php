@@ -3,12 +3,26 @@ use frontend\widgets\MenuView;
 use yii\helpers\Url;
 use yii\helpers\Html;
 ?>
-<header id="masthead"  class="site-header">
-    <div id="nav-header" class="">
+<style>
+    #masthead {
+        border-bottom:none;
+    }
+    .dropdown-menu{
+        background-color: rgba(255,255,255,0.3)
+    }
+     a:hover{
+        background-color: rgba(255,255,255,0.7)
+    }
+    .dropdown-toggle:hover{
+        background-color: rgba(255,255,255,0.7)
+    }
+</style>
 
+<header id="masthead"  class="site-header">
+    <div id="nav-header" style="height: 65px; background-image: url(/static/images/top.png)" class="">
         <div style="float: left;margin-top: 13px;margin-left: 20px">
             <a href="<?= yii::$app->getHomeUrl() ?>"><img style="width: 139px"
-                        src="<?= yii::$app->getRequest()->getBaseUrl() ?>/static/images/logo.png"
+                        src="<?= yii::$app->getRequest()->getBaseUrl() ?>/static/images/purelove.png"
                         alt="<?= yii::$app->feehi->website_title ?>"></a>
         </div>
         <div style="float: left">
@@ -45,8 +59,9 @@ use yii\helpers\Html;
                                     <li><a href="#">个人中心</a></li>
                                     <li><a href='<?=Url::to(['order/my-index'])?>'>我的预约</a></li>
                                     <li><a href='<?=Url::to(['site/update-password'])?>'>修改密码</a></li>
+                                    <li><a href='<?=Url::to(['action/create?lo=1'])?>'>我的报名</a></li>
                                     <li role="separator" class="divider"></li>
-                                    <li><a href="<?= Url::to(['site/logout']) ?>"
+                                    <li><a href="<?= Url::to(['site/logout']);?>"
                                            class="signup-loader">
                                             <?= yii::t('frontend', 'Log out') ?>
                                         </a>

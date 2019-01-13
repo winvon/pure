@@ -360,4 +360,5 @@ return [
     'Orders'=>'预约',
     'Pays'=>'支付',
     'Notice'=>'公告',
+    'Actions'=>'活动',
 ];

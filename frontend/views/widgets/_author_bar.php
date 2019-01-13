@@ -27,6 +27,7 @@ use common\models\Notice;
     textarea{
         height:160px;
         color: grey;
+        background-color: rgba(255,255,255,0.1);
     }
 </style>
 <aside class="sidebar">

@@ -43,6 +43,7 @@ AppAsset::register($this);
         </script>
     </head>
     <?php $this->beginBody() ?>
+
     <body class="home blog">
     <?= $this->render('/widgets/_flash') ?>
     <style>
@@ -65,7 +66,9 @@ AppAsset::register($this);
             background: #ffffff;
         }
         body {
-            background-color: white;
+            /*background-color: white;*/
+            background-image: url(/static/images/background.png);
+            background-attachment:fixed;
         }
     </style>
     <?= $this->renderFile('@frontend/views/layouts/header.php')?>

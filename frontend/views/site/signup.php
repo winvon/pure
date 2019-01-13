@@ -57,6 +57,9 @@ $this->params['breadcrumbs'][] = $this->title;
         font-size: 12px;
         color: grey;
     }
+    .login-box{
+        background-color: rgba(255,255,255,0.1)
+    }
 </style>
 <div class="content-wrap">
     <div class="login-box">

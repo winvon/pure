@@ -51,6 +51,13 @@ $this->title = yii::$app->feehi->website_title;
         border-radius: 0;
     }
 
+    .excerpt {
+         background-color: rgba(255,255,255,0.1);
+    }
+    .excerpt :hover{
+         background-color: rgba(255,255,255,0.2);
+    }
+    
 </style>
 <div class="content-wrap">
     <div class="content">

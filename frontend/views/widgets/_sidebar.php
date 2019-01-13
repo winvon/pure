@@ -19,14 +19,20 @@ use common\models\Order;
     li {
         color: #777;
     }
-
     .d_comment .avatar {
         float: left;
         width: 40px;
         margin: 10px 10px 10px 0;
         border-radius: 50%;
     }
-
+    .d_textbanner a {
+         background-color: inherit;
+         border: none;
+         border-radius: 4px;
+         display: block;
+         font-size: 12px;
+         padding: 0 15px 15px;
+    }
     .find-more {
         position: absolute;
         vertical-align: middle;
@@ -44,7 +50,6 @@ use common\models\Order;
 
     /*先初始化一下默认样式*/
     .notice {
-
         height: 35px; /*固定公告栏显示区域的高度*/
         padding: 0 10px;
         overflow: hidden;
@@ -58,6 +63,12 @@ use common\models\Order;
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
+    }
+    .widget {
+        background-color: rgba(255,255,255,0.1)
+    }
+    .title {
+        background-color: rgba(255,255,255,0.1)
     }
 </style>
 <aside class="sidebar">
@@ -85,7 +96,7 @@ use common\models\Order;
             <?php
             $tagsModel = new ArticleMetaTag();
             foreach ($tagsModel->getHotestTags() as $k => $v) {
-                echo "<a title='' href='" . Url::to(['search/tag', 'tag' => $k]) . "' data-original-title='{$v}" . yii::t('frontend', ' Topics') . "'>{$k} ({$v})</a>";
+                echo "<a style='background-color: rgba(255,255,255,0.3)' title='' href='" . Url::to(['search/tag', 'tag' => $k]) . "' data-original-title='{$v}" . yii::t('frontend', ' Topics') . "'>{$k} ({$v})</a>";
             }
             ?>
         </div>
@@ -111,7 +122,7 @@ use common\models\Order;
                         <li style="margin:5px auto;height: 60px">
                             <div class="row">
                                 <div class="col-md-3">
-                                    <a href=author/view?author_id=<?= $r['id'] ?> style="height: 52px;width: 50px">
+                                    <a href=author/view?author_id=<?= $r['id'] ?> style="background-color:  rgba(255,255,255,0.1); title;height: 52px;width: 50px">
                                         <img data-original="<?= yii::$app->getRequest()->getBaseUrl() . $r['avatar'] ?>"
                                              class="avatar" height="48"
                                              width="48" src=""

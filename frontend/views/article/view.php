@@ -47,13 +47,11 @@ ViewAsset::register($this);
         float: none;
         margin: auto;
     }
-
     .content {
         margin-right: 0;
         padding-left: 6%;
         padding-right: 6%;
     }
-
     p {
         border: 0px;
         margin-top: 0px;
@@ -64,10 +62,36 @@ ViewAsset::register($this);
         line-height: 1.7;
         white-space: normal;
     }
+    .breadcrumbs {
+        background-color: rgba(255,255,255,0.1)
+    }
+    .article-content {
+        background-color: rgba(255,255,255,0.1)
+    }
+    .article-header {
+        background-color: rgba(255,255,255,0.1);
+        border-bottom: none;
+    }
+    .article-footer {
+        background-color: rgba(255,255,255,0.1);
+        border-top: none;
+    }
+    .comt-title {
+        background-color: rgba(255,255,255,0.1);
+    }
+    .comt {
+        background-color: rgba(255,255,255,0.1);
+    }
+    #postcomments {
+        background-color: rgba(255,255,255,0.1);
+    }
+    #comments {
+        border-bottom: none;
+    }
 </style>
-<div class="content-wrap">
+<div class="content-wrap"  >
     <div class="content">
-        <div class="breadcrumbs">
+        <div class="breadcrumbs" >
             <a title="<?= yii::t('frontend', 'Return Home') ?>" href="<?= yii::$app->getHomeUrl() ?>"><i
                         class="layui-icon layui-icon-home"></i></a>
             <small>&gt;</small>
@@ -120,12 +144,12 @@ ViewAsset::register($this);
                    like-url="<?= Url::to(['article/like']) ?>" id="Addlike" class="action"><i
                             class="fa fa-heart-o"></i><?= yii::t('frontend', 'Like') ?> (<span
                             class="count"><?= $model->getArticleLikeCount() ?></span>)</a>
-                <span class="or">or</span>
-                <span class="action action-share bdsharebuttonbox"><i
+                <span class="or"  style="display: none" >or</span>
+                <span class="action action-share bdsharebuttonbox" style="display: none"><i
                             class="fa fa-share-alt"></i><?= yii::t('frontend', 'Share') ?> (<span class="bds_count"
                                                                                                   data-cmd="count"
                                                                                                   title="累计分享0次">0</span>)
-                    <div class="action-popover">
+                    <div class="action-popover" >
                         <div class="popover top in"><div class="arrow"></div>
                             <div class="popover-content">
                                 <a href="#" class="sinaweibo fa fa-weibo" data-cmd="tsina" title="分享到新浪微博"></a>

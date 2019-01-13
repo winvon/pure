@@ -54,6 +54,9 @@ $this->params['breadcrumbs'][] = $this->title;
     .intl-tel-input .country-list {
         z-index: 100;
     }
+    .login-box{
+        background-color: rgba(255,255,255,0.1)
+    }
 </style>
 <div class="content-wrap">
     <div class="login-box">

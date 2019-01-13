@@ -18,7 +18,13 @@ $this->title = yii::t('app', 'Login');
 $this->params['breadcrumbs'][] = $this->title;
 \frontend\assets\IndexAsset::register($this);
 ?>
+
 <?= $this->render('/site/header') ?>
+<style>
+    .login-box{
+        background-color: rgba(255,255,255,0.1)
+    }
+</style>
 <div class="content-wrap">
     <div class="login-box">
         <form class="layui-form layui-form-pane" action="<?= Url::to(['site/login']) ?>" method="post">

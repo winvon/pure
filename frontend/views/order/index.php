@@ -20,12 +20,18 @@ $isGuest = Yii::$app->user->isGuest ? true : 'false';
     .select2-container--default .select2-selection--single .select2-selection__rendered {
         line-height: 38px;
     }
-
     .select2-container .select2-selection--single {
         height: 38px;
     }
+    .row{
+        height:800px;
+        background-color: rgba(255,255,255,0.2);
+    }
+    .layui-table {
+        background-color: rgba(255,255,255,0.0);
+     }
 </style>
-<div class="row" style="height:900px">
+<div class="row" ">
     <div class="col-sm-12">
         <div class="demoTable">
             <div class="layui-input-inline " style="width: 130px;">

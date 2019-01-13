@@ -1,7 +1,7 @@
 <?php
 use yii\helpers\Url;
 use backend\models\Article;
-
+use backend\models\User;
 ?>
 
 <style>
@@ -97,9 +97,11 @@ use backend\models\Article;
     }
 
     .banner {
-        background-image: url(/static/images/banner.jpg);
+        background-image: url(/static/images/_banner.jpg);
+        opacity:0.50;
         width: 930px;
         height: 97px;
+        margin-top: 40px;
         border-radius: 4px;
     }
 
@@ -109,17 +111,22 @@ use backend\models\Article;
         margin-top: 60px;
         float: right;
     }
+
+    .meta {
+        background-color: rgba(255,255,255,0.3)
+    }
+
 </style>
 
 <div class="container recommend">
     <div class="banner">
-        <a target="_blank" class="help" href="">
-            如何成为疗愈师
-        </a>
+<!--        <a target="_blank" class="help" href="">-->
+<!--            如何成为疗愈师-->
+<!--        </a>-->
     </div>
 
     <div class="row author-list">
-        <?php $us = \backend\models\User::find()->where(['type' => 1])->limit(24)->all();
+        <?php $us = User::find()->where(['type' => 1])->andWhere(['status'=>User::STATUS_ACTIVE])->limit(24)->all();
         foreach ($us as $u) {
             ?>
             <div class="col-xs-4">
@@ -148,6 +155,7 @@ use backend\models\Article;
                     <div class="recent-update">
                         <?php $as = Article::find()
                             ->where(['type' => Article::ARTICLE])
+                            ->andWhere(['author_id' => $u->id])
                             ->andWhere(['status' => Article::ARTICLE_PUBLISHED])
                             ->orderBy('created_at DESC')
                             ->limit(3)
