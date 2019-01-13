@@ -80,11 +80,11 @@ class SiteController extends BackendController
      */
     public function actionIndex()
     {
-        $cach=Yii::$app->cache;
-        $tishi=$cach->get('tishi');
-        if (Yii::$app->user->identity->type == AdminUser::TYPE_TEACHER &&$this!=Yii::$app->user->id) {
-            $cach->set('tishi',Yii::$app->user->id,6*60*60);
+        $cache=Yii::$app->cache;
+        $tishi=$cache->get('tishi');
+        if (Yii::$app->user->identity->type == AdminUser::TYPE_TEACHER  && !$tishi!=Yii::$app->user->id) {
             if (Yii::$app->user->identity->admin_status == AdminUser::STATUS_ADMIN_PASS_NOT) {
+                $cache->set('tishi',Yii::$app->user->id,5*60*60);
                 Yii::$app->session->setFlash('error','资料审核失败，请到\'个人资料\'查看失败原因');
             }
         }
