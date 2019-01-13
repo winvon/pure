@@ -14,7 +14,7 @@ use backend\actions\ViewAction;
 /**
  * ActionController implements the CRUD actions for Action model.
  */
-class ActionController extends \yii\web\Controller
+class ActionController extends BackendController
 {
     public function actions()
     {
