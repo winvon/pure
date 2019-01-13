@@ -17,6 +17,7 @@ class BackendController extends Controller
 {
 
     public $except = [
+        '/',
         'site/index',
         'site/login',
         'site/logout',
