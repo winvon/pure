@@ -40,7 +40,7 @@ class Action extends \yii\db\ActiveRecord
             [['name', 'email', 'mobile', 'changci'], 'required'],
             [['sex', 'changci', 'status', 'created_at', 'updated_at', 'is_delete'], 'integer'],
             [['num'], 'string', 'max' => 50],
-//            ['email', 'email'],
+            ['email', 'email'],
             [['name', 'email', 'mobile'], 'string', 'max' => 255],
             [['common', 'reason','num'], 'safe'],
         ];
