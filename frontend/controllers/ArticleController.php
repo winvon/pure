@@ -27,13 +27,13 @@ use yii\web\XmlResponseFormatter;
 class ArticleController extends FrontendController
 {
 
-
     public function behaviors()
     {
+        return [];
         return [
             [
                 'class' => HttpCache::className(),
-                'only' => ['view'],
+                'only' => ['view'],//'view'
                 'lastModified' => function ($action, $params) {
                     $id = yii::$app->getRequest()->get('id');
                     $model = Article::findOne(['id' => $id, 'type' => Article::ARTICLE, 'status' => Article::ARTICLE_PUBLISHED]);
@@ -44,9 +44,9 @@ class ArticleController extends FrontendController
             ],];
     }
 
+
     /**
      * 分类列表页
-     *
      * @param string $cat 分类名称
      * @return string
      * @throws \yii\web\NotFoundHttpException

@@ -11,6 +11,7 @@ namespace frontend\assets;
 
 class IndexAsset extends \yii\web\AssetBundle
 {
+    public $jsOptions = ['position' => \yii\web\View::POS_HEAD];
     public $js = [
         'static/js/responsiveslides.min.js',
     ];

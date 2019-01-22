@@ -44,7 +44,7 @@ use common\models\Order;
                             <span class="info-author">文章<i class="fa fa-file-word-o"></i></span>
                         </div>
                     </a>
-                    <a href="" class="">
+                    <a href=<?=\yii\helpers\Url::to(['order/index','author_id'=>$author_id])?> class="">
                         <div class="meta-block" style="border: none">
                             <span class="info-number"><?=  Order::find()
                                     ->where(['admin_id' => $author_id])

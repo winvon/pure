@@ -151,7 +151,7 @@ use backend\models\User;
                     <!--                                                         style="font-size: 13px"></i><span>关注</span>-->
                     <!--                    </a>-->
                     <hr>
-                    <div class="meta">最近更新</div>
+                    <a target="_blank" href=<?=Url::to(['order/index','author_id'=>$u->id])?> class="meta btn btn-success">预约</a>
                     <div class="recent-update">
                         <?php $as = Article::find()
                             ->where(['type' => Article::ARTICLE])

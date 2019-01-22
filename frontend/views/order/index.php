@@ -20,35 +20,38 @@ $isGuest = Yii::$app->user->isGuest ? true : 'false';
     .select2-container--default .select2-selection--single .select2-selection__rendered {
         line-height: 38px;
     }
+
     .select2-container .select2-selection--single {
         height: 38px;
     }
-    .row{
-        height:800px;
-        background-color: rgba(255,255,255,0.2);
+
+    .row {
+        height: 800px;
+        background-color: rgba(255, 255, 255, 0.2);
     }
+
     .layui-table {
-        background-color: rgba(255,255,255,0.0);
-     }
+        background-color: rgba(255, 255, 255, 0.0);
+    }
 </style>
 <div class="row" ">
-    <div class="col-sm-12">
-        <div class="demoTable">
-            <div class="layui-input-inline " style="width: 130px;">
-                <select class="form-control" id="admin_id">
-                </select>
-            </div>
-            <div class="layui-input-inline " style="width: 130px;">
-                <div class="layui-input-inline">
-                    <input type="text" class="layui-input" id="start_time" placeholder="选择日期">
-                </div>
-            </div>
-            <button class="layui-btn" data-type="reload"><?= Yii::t("app", "Search") ?></button>
-            <button class="layui-btn layui-btn-primary" data-type="reset"><?= Yii::t("app", "Reset") ?>
-            </button>
+<div class="col-sm-12">
+    <div class="demoTable">
+        <div class="layui-input-inline " style="width: 130px;">
+            <select class="form-control" id="admin_id">
+            </select>
         </div>
-        <table id="demo" lay-filter="test"></table>
+        <div class="layui-input-inline " style="width: 130px;">
+            <div class="layui-input-inline">
+                <input type="text" class="layui-input" id="start_time" placeholder="选择日期">
+            </div>
+        </div>
+        <button class="layui-btn" data-type="reload"><?= Yii::t("app", "Search") ?></button>
+        <button class="layui-btn layui-btn-primary" data-type="reset"><?= Yii::t("app", "Reset") ?>
+        </button>
     </div>
+    <table id="demo" lay-filter="test"></table>
+</div>
 </div>
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="order">预约</a>
@@ -106,6 +109,12 @@ $isGuest = Yii::$app->user->isGuest ? true : 'false';
             , id: 'testReload'
             , limit: 30
             , limits: [60, 120]
+            <?php
+            if (Yii::$app->request->get('author_id')) {
+                echo " , where: {
+                admin_id: " . Yii::$app->request->get('author_id') . " ,}";
+            }
+            ?>
             , url: '<?=Url::to(['order/list'])?>' //数据接口
             , page: true //开启分页
             , cols: [[ //表头
@@ -188,10 +197,14 @@ $isGuest = Yii::$app->user->isGuest ? true : 'false';
                             layer.close(index)
                         }
                         , btn2: function (index, layero) {
-                            if (data.price==null){
-                                data.price=num
+                            if (data.price == null) {
+                                data.price = num
                             }
-                            $.post('<?=Url::to(['order/order'])?>', {id: data.id, price: data.price,_csrf:'<?=Yii::$app->request->getCsrfToken()?>'}, function (data) {
+                            $.post('<?=Url::to(['order/order'])?>', {
+                                id: data.id,
+                                price: data.price,
+                                _csrf: '<?=Yii::$app->request->getCsrfToken()?>'
+                            }, function (data) {
                                 if (data == true) {
                                     layer.msg('恭喜,预约成功.可到<span style="color: yellow">我的预约</span>查看 ');
                                 } else {

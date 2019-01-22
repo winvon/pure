@@ -81,4 +81,51 @@ class ActionController extends \yii\web\Controller
         }
          return $this->render('create',['model'=>$model]);
     }
+
+    public function actionSend(){
+        $content='<div>
+            <h3>恭喜您已报名成功</h3>
+            <p style="font-size: 12px">恭喜您已报名成功，若需修改资料，请登陆到www.purelove.ltd 【我的报名】 修改报名讯息。</p>
+            <p style="font-size: 12px">缴费之后请email负责人,或者回复本邮件已缴费。回复内容包含您的的报名编号或者电话号码或者微信号码。</p>
+            <p>报名缴费各地区负责人账户及邮箱</p>
+            <div class="div-box" style="border:  1px solid #bababa;font-size: 12px ;width: 300px">
+                <p>馬來西亞负责人：靜娟</p>
+                <p>*入账银行：馬來亞銀行（Maybank）</p>
+                <p>*账号姓名：Tu Chin Juan</p>
+                <p>*账号号码：1010-6781-6041</p>
+                <p>*Email ： ginger.tu@gmail.com</p>
+            </div>
+            <div style="border:  1px solid #bababa;font-size: 12px ;width: 300px">
+                <p>新加坡负责人：林潔馨 Jacelyn Lim</p>
+                <p>*入账银行：Oversea-Chinese Banking (OCBC)</p>
+                <p>*账号姓名： Lim Gat Sin</p>
+                <p>*账号号码：608053294001</p>
+                <p>*Email : jaceljx@gmail.com</p>
+            </div>
+            <div style="border:  1px solid #bababa;font-size: 12px ;width: 300px">
+                <p>台湾台北负责人</p>
+                <p>*入账银行：中國信託銀行(chinatrust)</p>
+                <p>*账号号码：帳戶：822-277531011281</p>
+                <p>*中文名字：丁竑峻 </p>
+                <p>* Email ：frederic123123123123@gmail.com</p>
+            </div>
+            <div style="border:  1px solid #bababa;font-size: 12px ;width: 300px">
+                <p>北京|深圳|香港|澳门负责人</p>
+                <p>子漩老師 </p>
+                <p>* 入账银行：恒生銀行 </p>
+                <p>* 账号号码：936 050855 888</p>
+                <p>* 中文名字：张子漩 </p>
+                <p>* 英文姓名：Cheung Tsz Suen </p>
+            </div>
+        </div>';
+       $res=  Yii::$app->mailer->compose()
+            ->setFrom('m17623006012@163.com')
+            ->setFrom('437328577@qq.com')
+            ->setTo('m17623006012@163.com')
+            ->setSubject('阿卡西课程报名')
+            ->setTextBody('Plain text content')
+            ->setHtmlBody($content)
+            ->send();
+       var_dump($res);
+    }
 }

@@ -42,7 +42,7 @@ class Action extends \yii\db\ActiveRecord
             [['num'], 'string', 'max' => 50],
             ['email', 'email'],
             [['name', 'email', 'mobile'], 'string', 'max' => 255],
-            [['comment', 'reason','num'], 'safe'],
+            [['comment', 'reason','num','wechat'], 'safe'],
         ];
     }
 
@@ -58,6 +58,7 @@ class Action extends \yii\db\ActiveRecord
             'sex' => '性别',
             'email' => '邮箱',
             'mobile' => '通讯电话',
+            'wechat' => '微信账号',
             'changci' => '参加场次',
             'reason' => '拒绝原因',
             'comment' => '备注',

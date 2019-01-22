@@ -34,6 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'sex',
             'email:email',
             'mobile',
+            'wechat',
             'comment',
             'reason',
             'changci',

@@ -10,6 +10,7 @@ namespace frontend\assets;
 
 class ViewAsset extends \yii\web\AssetBundle
 {
+    public $jsOptions = ['position' => \yii\web\View::POS_HEAD];
     public $css = [
         'static/syntaxhighlighter/styles/shCoreDefault.css'
     ];
