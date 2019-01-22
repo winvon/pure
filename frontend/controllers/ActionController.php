@@ -66,8 +66,12 @@ class ActionController extends \yii\web\Controller
         $model=new Action();
         if (yii::$app->getRequest()->getIsPost()) {
             if ($model->load(yii::$app->getRequest()->post()) && $model->save()) {
+                for ($i=0;$i<3;$i++){
+                    if ($this->send($model->email)) {
+                        break;
+                    }
+                }
                 yii::$app->getSession()->setFlash('success', yii::t('app', '活动报名成功,可前往我的活动查看'));
-
                 return $this->redirect(['update','id'=>$model->id]);
             } else {
                 $errorReasons = $model->getErrors();
@@ -82,7 +86,7 @@ class ActionController extends \yii\web\Controller
          return $this->render('create',['model'=>$model]);
     }
 
-    public function actionSend(){
+    public function send($email){
         $content='<div>
             <h3>恭喜您已报名成功</h3>
             <p style="font-size: 12px">恭喜您已报名成功，若需修改资料，请登陆到www.purelove.ltd 【我的报名】 修改报名讯息。</p>
@@ -120,8 +124,7 @@ class ActionController extends \yii\web\Controller
         </div>';
        $res=  Yii::$app->mailer->compose()
             ->setFrom('m17623006012@163.com')
-            ->setFrom('437328577@qq.com')
-            ->setTo('m17623006012@163.com')
+            ->setTo($email)
             ->setSubject('阿卡西课程报名')
             ->setTextBody('Plain text content')
             ->setHtmlBody($content)
