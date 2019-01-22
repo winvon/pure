@@ -132,7 +132,7 @@ $this->params['breadcrumbs'] = [
             <img src="/static/images/zzz.png" width="160px">
         </div>
     </div>
-    <div class="col-md-4">
+    <!--<div class="col-md-4">
         <div>
             <h3>恭喜您已报名成功</h3>
             <p style="font-size: 12px">恭喜您已报名成功，若需修改资料，请登陆到www.purelove.ltd 【我的报名】 修改报名讯息。</p>
@@ -169,7 +169,7 @@ $this->params['breadcrumbs'] = [
                 <p>* 英文姓名：Cheung Tsz Suen </p>
             </div>
         </div>
-    </div>
+    </div>-->
     <script type="text/javascript">
         function myfun() {
             var id = $("#action-changci").val();
