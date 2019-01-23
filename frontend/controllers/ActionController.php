@@ -123,7 +123,7 @@ class ActionController extends \yii\web\Controller
             </div>
         </div>';
        $res=  Yii::$app->mailer->compose()
-            ->setFrom('m17623006012@163.com')
+            ->setFrom('437328577@qq.com')
             ->setTo($email)
             ->setSubject('阿卡西课程报名')
             ->setTextBody('Plain text content')
