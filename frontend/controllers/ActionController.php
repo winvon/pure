@@ -10,6 +10,7 @@ use backend\actions\UpdateAction;
 use backend\actions\IndexAction;
 use backend\actions\DeleteAction;
 use backend\actions\SortAction;
+
 /**
  * ActionController implements the CRUD actions for Action model.
  */
@@ -20,15 +21,15 @@ class ActionController extends \yii\web\Controller
         return [
             'index' => [
                 'class' => IndexAction::className(),
-                'data' => function(){
-                    
-                        $searchModel = new ActionSearch();
-                        $dataProvider = $searchModel->search(yii::$app->getRequest()->getQueryParams());
-                        return [
-                            'dataProvider' => $dataProvider,
-                            'searchModel' => $searchModel,
-                        ];
-                    
+                'data' => function () {
+
+                    $searchModel = new ActionSearch();
+                    $dataProvider = $searchModel->search(yii::$app->getRequest()->getQueryParams());
+                    return [
+                        'dataProvider' => $dataProvider,
+                        'searchModel' => $searchModel,
+                    ];
+
                 }
             ],
 //            'create' => [
@@ -50,29 +51,30 @@ class ActionController extends \yii\web\Controller
         ];
     }
 
-    public function actionCreate(){
-        if (Yii::$app->user->isGuest){
+    public function actionCreate()
+    {
+        if (Yii::$app->user->isGuest) {
             yii::$app->getSession()->setFlash('error', yii::t('app', '请先登录！'));
             return $this->redirect(['site/login']);
         }
-        $model=Action::find()->where(['uid'=>Yii::$app->user->id])->one();
-        if (Yii::$app->request->get('lo')==1&&$model!=null){
-            return $this->redirect(['update','id'=>$model->id]);
+        $model = Action::find()->where(['uid' => Yii::$app->user->id])->one();
+        if (Yii::$app->request->get('lo') == 1 && $model != null) {
+            return $this->redirect(['update', 'id' => $model->id]);
         }
-        if ($model!=null){
+        if ($model != null) {
             yii::$app->getSession()->setFlash('error', yii::t('app', '您已报名！'));
-            return $this->redirect(['update','id'=>$model->id]);
+            return $this->redirect(['update', 'id' => $model->id]);
         }
-        $model=new Action();
+        $model = new Action();
         if (yii::$app->getRequest()->getIsPost()) {
             if ($model->load(yii::$app->getRequest()->post()) && $model->save()) {
-                for ($i=0;$i<3;$i++){
-                    if ($this->send($model->email)) {
+                for ($i = 0; $i < 3; $i++) {
+                    if ($this->send($model->email,$model->num)) {
                         break;
                     }
                 }
                 yii::$app->getSession()->setFlash('success', yii::t('app', '活动报名成功,可前往我的活动查看'));
-                return $this->redirect(['update','id'=>$model->id]);
+                return $this->redirect(['update', 'id' => $model->id]);
             } else {
                 $errorReasons = $model->getErrors();
                 $err = '';
@@ -83,13 +85,14 @@ class ActionController extends \yii\web\Controller
                 yii::$app->getSession()->setFlash('error', $err);
             }
         }
-         return $this->render('create',['model'=>$model]);
+        return $this->render('create', ['model' => $model]);
     }
 
-    public function send($email){
-        $content='<div>
+    public function send($email, $num)
+    {
+        $content = '<div>
             <h3>恭喜您已报名成功</h3>
-            <p style="font-size: 12px">恭喜您已报名成功，若需修改资料，请登陆到www.purelove.ltd 【我的报名】 修改报名讯息。</p>
+            <p style="font-size: 12px">恭喜您已报名成功，报名编号：' . $num . '，若需修改资料，请登陆到www.purelove.ltd 【我的报名】 修改报名讯息。</p>
             <p style="font-size: 12px">缴费之后请email负责人,或者回复本邮件已缴费。回复内容包含您的的报名编号或者电话号码或者微信号码。</p>
             <p>报名缴费各地区负责人账户及邮箱</p>
             <div class="div-box" style="border:  1px solid #bababa;font-size: 12px ;width: 300px">
@@ -122,13 +125,13 @@ class ActionController extends \yii\web\Controller
                 <p>* 英文姓名：Cheung Tsz Suen </p>
             </div>
         </div>';
-       $res=  Yii::$app->mailer->compose()
+        $res = Yii::$app->mailer->compose()
             ->setFrom('437328577@qq.com')
             ->setTo($email)
             ->setSubject('阿卡西课程报名')
             ->setTextBody('Plain text content')
             ->setHtmlBody($content)
             ->send();
-       var_dump($res);
+        var_dump($res);
     }
 }
