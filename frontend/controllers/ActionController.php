@@ -4,7 +4,7 @@ namespace frontend\controllers;
 
 use Yii;
 use backend\models\search\ActionSearch;
-use backend\models\Action;
+use frontend\models\Action;
 use backend\actions\CreateAction;
 use backend\actions\UpdateAction;
 use backend\actions\IndexAction;
