@@ -68,7 +68,7 @@ class ActionController extends \yii\web\Controller
         $model = new Action();
         if (yii::$app->getRequest()->getIsPost()) {
             if ($model->load(yii::$app->getRequest()->post()) && $model->save()) {
-                for ($i = 0; $i < 3; $i++) {
+                for ($i = 0; $i < 2; $i++) {
                     if ($this->send($model->email,$model->num)) {
                         break;
                     }
