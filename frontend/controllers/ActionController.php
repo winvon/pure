@@ -101,6 +101,7 @@ class ActionController extends \yii\web\Controller
                 <p>*账号姓名：Tu Chin Juan</p>
                 <p>*账号号码：1010-6781-6041</p>
                 <p>*Email ： ginger.tu@gmail.com</p>
+                <p>*通讯电话 ：+6012-7886553</p>
             </div>
             <div style="border:  1px solid #bababa;font-size: 12px ;width: 300px">
                 <p>新加坡负责人：林潔馨 Jacelyn Lim</p>
@@ -108,6 +109,7 @@ class ActionController extends \yii\web\Controller
                 <p>*账号姓名： Lim Gat Sin</p>
                 <p>*账号号码：608053294001</p>
                 <p>*Email : jaceljx@gmail.com</p>
+                <p>*通讯电话 ：+65-83992648</p>
             </div>
             <div style="border:  1px solid #bababa;font-size: 12px ;width: 300px">
                 <p>台湾台北负责人</p>
@@ -115,6 +117,7 @@ class ActionController extends \yii\web\Controller
                 <p>*账号号码：帳戶：822-277531011281</p>
                 <p>*中文名字：丁竑峻 </p>
                 <p>* Email ：frederic123123123123@gmail.com</p>
+                <p>*通讯电话 ：+886-922-491707</p>
             </div>
             <div style="border:  1px solid #bababa;font-size: 12px ;width: 300px">
                 <p>北京|深圳|香港|澳门负责人</p>
@@ -123,10 +126,12 @@ class ActionController extends \yii\web\Controller
                 <p>* 账号号码：936 050855 888</p>
                 <p>* 中文名字：张子漩 </p>
                 <p>* 英文姓名：Cheung Tsz Suen </p>
+                <p>*通讯电话 ：+855-66293812</p>
+                <p>*通讯电话 ：+86-13728987573</p>
             </div>
         </div>';
         $res = Yii::$app->mailer->compose()
-            ->setFrom('437328577@qq.com')
+            ->setFrom('1165180201@qq.com')
             ->setTo($email)
             ->setSubject('阿卡西课程报名')
             ->setTextBody('Plain text content')

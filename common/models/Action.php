@@ -120,10 +120,10 @@ class Action extends \yii\db\ActiveRecord
              $num=self::find()->where(['changci'=>$this->changci])->orderBy('id DESC')->one();
              $id=$num==null?0:$num->id;
              switch ($this->changci){
-                case 1:$this->num='HK190301-'.$id.rand(1000,9999);break;
-                case 2:$this->num='MS190308-'.$id.rand(1000,9999);break;
-                case 3:$this->num='TP190315-'.$id.rand(1000,9999);break;
-                case 4:$this->num='BJ190322-'.$id.rand(1000,9999);break;
+                case 3:$this->num='HK190412-'.$id.rand(1000,9999);break;
+                case 1:$this->num='MS190308-'.$id.rand(1000,9999);break;
+                case 2:$this->num='TP190315-'.$id.rand(1000,9999);break;
+                case 4:$this->num='BJ190426-'.$id.rand(1000,9999);break;
                 default  :$this->num='';break;
              }
              $this->uid=Yii::$app->user->id;

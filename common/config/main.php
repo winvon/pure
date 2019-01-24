@@ -49,13 +49,9 @@ $config = [
             'useFileTransport' => false,//false发送邮件，true只是生成邮件在runtime文件夹下，不发邮件
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
-//                'host' => 'smtp.163.com',   //每种邮箱的host配置不一样
                 'host' => 'smtp.qq.com',   //每种邮箱的host配置不一样
-//                'username' => 'm17623006012@163.com',
-                'username' => '437328577@qq.com',
-//                'password' => 'fengwenfei0706',
-                'password' => 'roxfvqwkofupbhdf',
-//                'port' => '25',//163
+                'username' => '1165180201@qq.com',
+                'password' => 'vnfvddzpwvuafhcb',
                 'port' => '587',//QQ
                 'encryption' => 'tls',
             ],
