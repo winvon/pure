@@ -95,7 +95,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ])->passwordInput() ?>
 
         <?= $form->field($model, 'telephone', [
-            'template' => '<label class="layui-form-label"><i class="layui-icon layui-icon-cellphone"></i></label>{input}{error}{hint}<span class=\'input-span\'>1选择手机号所在国际地区,2输入的通讯号码不用加区号</span>'
+            'template' => '<label class="layui-form-label"><i class="layui-icon layui-icon-cellphone"></i></label>{input}{error}{hint}<span class=\'input-span\'>1.选择手机号所在国际地区,2.输入的通讯号码不用加区号</span>'
         ])->textInput(['type'=>'tel']) ?>
 
         <?= $form->field($model, 'code', [
