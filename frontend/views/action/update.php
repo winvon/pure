@@ -45,10 +45,10 @@ $this->params['breadcrumbs'] = [
             <div class="hr-line-dashed"></div>
             <?php
         } ?>
-        <?= $form->field($model, 'name')->textInput(['maxlength' => true, 'readonly' => true]) ?>
+        <?= $form->field($model, 'name')->textInput(['maxlength' => true ]) ?>
         <div class="hr-line-dashed"></div>
 
-        <?= $form->field($model, 'sex')->radioList(Action::getSexItem(), ['itemOptions' => ['disabled' => true]]) ?>
+        <?= $form->field($model, 'sex')->radioList(Action::getSexItem()) ?>
         <div class="hr-line-dashed"></div>
 
         <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>

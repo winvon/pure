@@ -131,13 +131,11 @@ class Action extends \yii\db\ActiveRecord
              $this->created_at=time();
          }else{
              if ($this->getAttribute('email')!=$this->getOldAttribute('email')){
-
                  for ($i = 0; $i < 2; $i++) {
                      if ($this->send($this->email,$this->num)) {
                          break;
                      }
                  }
-
              }
          }
         $this->updated_at=time();
