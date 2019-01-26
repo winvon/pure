@@ -82,7 +82,7 @@ class User extends ActiveRecord implements IdentityInterface
                 'unique',
                 'targetClass' => User::className(),
                 'message' => yii::t('app', 'This telephone has already been taken'),
-                'on' => ['create', 'signup', 'update','change-not-important']
+                'on' => ['create', 'signup', 'update', 'change-not-important']
             ],
             [
                 'username',
@@ -99,7 +99,7 @@ class User extends ActiveRecord implements IdentityInterface
             [['username', 'password', 'code', 'telephone'], 'required', 'on' => ['signup']],
             [['username', 'code', 'telephone'], 'required', 'on' => ['update']],
             [['username'], 'unique', 'on' => 'create'],
-            [['roles', 'permissions', 'sign', 'introduce', 'admin_status','reason', 'nickname', 'district'], 'safe'],
+            [['roles', 'permissions', 'sign', 'introduce', 'admin_status', 'reason', 'nickname', 'district'], 'safe'],
             ['code', 'checkCode'],
             [['telephone', 'realname', 'card_number', 'bank', 'bank_account', 'current_address'], 'required', 'on' => 'self-update'],
         ];
@@ -127,11 +127,11 @@ class User extends ActiveRecord implements IdentityInterface
                 'introduce', 'nickname', 'current_address', 'avatar',
             ],
             'change-important' => [
-                'realname', 'card_number', 'card_img', 'bank', 'bank_account', 'certificate','admin_status',
+                'realname', 'card_number', 'card_img', 'bank', 'bank_account', 'certificate', 'admin_status',
             ],
             'change-password' => ['password', 'old_password', 'repassword'
             ],
-            'check' => ['password', 'admin_status','reason'],
+            'check' => ['password', 'admin_status', 'reason'],
         ];
     }
 
@@ -352,9 +352,10 @@ class User extends ActiveRecord implements IdentityInterface
                 $this->setPassword($this->password);
             }
         }
-        if ($this->admin_status==self::STATUS_ADMIN_PASS_NOT){
-            if (empty($this->reason)&&$this->type==self::TYPE_MANAGE) {
-                $this->addError('reason','审核不通过,拒绝原因必填');
+        if ($this->admin_status == self::STATUS_ADMIN_PASS_NOT) {
+            $user = Yii::$app->user;
+            if (empty($this->reason) && $user->identity->type == self::TYPE_MANAGE) {
+                $this->addError('reason', '审核不通过,拒绝原因必填');
                 return false;
             }
         }
