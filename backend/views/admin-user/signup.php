@@ -98,7 +98,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ->passwordInput(['placeholder' => yii::t("app", "Password")]) ?>
 
         <?= $form->field($model, 'telephone', [
-            'template' => "<div style='position:relative'>{input} {error} {hint}<span class='input-span'>请先选择手机号所在地区</span></div>",
+            'template' => "<div style='position:relative'>{input} {error} {hint}<span class='input-span'>1选择手机号所在国际地区,2输入的通讯号码不用加区号</span></div>",
         ])->textInput(['placeholder' => yii::t("app", "Telephone"),'style'=>'width:300px;height:38px']) ?>
 
         <?= $form->field($model, 'code', ['template' => "<div style='position:relative' class='form-group'><div  class='input-group'>{input}<a class='input-group-addon getcode'>获取验证码</a>\n{error}\n{hint}</div></div>"])
