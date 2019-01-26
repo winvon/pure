@@ -131,7 +131,7 @@ class User extends ActiveRecord implements IdentityInterface
             ],
             'change-password' => ['password', 'old_password', 'repassword'
             ],
-            'check' => ['password', 'admin_status', 'reason'],
+            'check' => ['password', 'admin_status','reason'],
         ];
     }
 
@@ -353,7 +353,7 @@ class User extends ActiveRecord implements IdentityInterface
             }
         }
         if ($this->admin_status==self::STATUS_ADMIN_PASS_NOT){
-            if (empty($this->reason)) {
+            if (empty($this->reason)&&$this->type==self::TYPE_MANAGE) {
                 $this->addError('reason','审核不通过,拒绝原因必填');
                 return false;
             }
