@@ -359,6 +359,9 @@ class User extends ActiveRecord implements IdentityInterface
                 return false;
             }
         }
+        if ($this->admin_status == self::STATUS_ADMIN_PASS) {
+             $this->reason='';
+        }
         return parent::beforeSave($insert);
     }
 
