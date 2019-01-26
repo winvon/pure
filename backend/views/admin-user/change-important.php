@@ -25,6 +25,8 @@ $this->title = "Admin";
             <div class="ibox">
                 <?= $this->render('/widgets/_ibox-title') ?>
                 <div class="ibox-content">
+                    <p style="font-size: 10px">提示：以下资料修改后，账户将进入审核状态，账户功能在审核通过后开启</p>
+                    <div class="hr-line-dashed"></div>
                     <?php $form = ActiveForm::begin([
                         'options' => [
                             'enctype' => 'multipart/form-data',
@@ -65,15 +67,11 @@ $this->title = "Admin";
     <script>
         <?php
         if (Yii::$app->user->identity->type == AdminUser::TYPE_TEACHER) {
-            if (Yii::$app->user->identity->admin_status == AdminUser::STATUS_ADMIN_PASS) {
-                echo "layer.msg('修改资料成功后，系统功能将暂停使用，待管理员审核后资料成功后开启！',{time:5000})";
-            }
             if (Yii::$app->request->get('lo')==1) {
                 if (Yii::$app->user->identity->admin_status == AdminUser::STATUS_ADMIN_CHECK) {
                     echo "layer.msg('请点击头像下方用户名，完善个人资料和重要资料',{time:5000})";
                 }
             }
-
         }
         ?>
 

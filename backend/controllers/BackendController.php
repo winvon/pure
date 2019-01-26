@@ -19,6 +19,7 @@ class BackendController extends Controller
     public $except = [
         '/',
         'site/index',
+        'site/help',
         'site/login',
         'site/logout',
         'admin-user/change-password',
@@ -39,7 +40,7 @@ class BackendController extends Controller
             return true;
         }
         if ($user->identity->admin_status != User::STATUS_ADMIN_PASS) {
-            if (in_array(Yii::$app->request->pathInfo,$this->except)) {
+            if (in_array($action->uniqueId,$this->except)) {
                 return true;
             }else{
                 echo '资料审核中，审核通过后开启';

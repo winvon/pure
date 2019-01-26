@@ -56,7 +56,7 @@ class Action extends \yii\db\ActiveRecord
             'num' => '编号',
             'name' => '姓名',
             'sex' => '性别',
-            'email' => '邮箱',
+            'email' => '电子邮箱',
             'mobile' => '通讯电话',
             'wechat' => '微信账号',
             'changci' => '参加场次',

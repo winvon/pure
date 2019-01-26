@@ -114,6 +114,7 @@ return [
             'site/error',
             'site/index',
             'site/main',
+            'site/help',
             'site/logout',
             'site/language',
             'site/forget-password',

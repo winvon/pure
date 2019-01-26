@@ -24,20 +24,20 @@ use yii\filters\VerbFilter;
 use yii\web\HttpException;
 use yii\captcha\CaptchaAction;
 use backend\models\AdminUser;
+
 /**
  * Site controller
  */
-
 class SiteController extends BackendController
 {
-    public static $tishi=0;
+    public static $tishi = 0;
 
     public function behaviors()
     {
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'except' =>['login', 'captcha', 'language','forget-password'],
+                'except' => ['login', 'captcha', 'language', 'forget-password'],
                 'rules' => [
                     [
                         'allow' => true,
@@ -67,7 +67,7 @@ class SiteController extends BackendController
             'foreColor' => 0xffffff,//字体颜色
             'offset' => 13,//设置字符偏移量
         ];
-        if( YII_ENV_TEST ) $captcha = array_merge($captcha, ['fixedVerifyCode'=>'testme']);
+        if (YII_ENV_TEST) $captcha = array_merge($captcha, ['fixedVerifyCode' => 'testme']);
         return [
             'captcha' => $captcha,
         ];
@@ -80,12 +80,12 @@ class SiteController extends BackendController
      */
     public function actionIndex()
     {
-        $cache=Yii::$app->cache;
-        $tishi=$cache->get('tishi');
-        if (Yii::$app->user->identity->type == AdminUser::TYPE_TEACHER  && $tishi!=Yii::$app->user->id) {
+        $cache = Yii::$app->cache;
+        $tishi = $cache->get('tishi');
+        if (Yii::$app->user->identity->type == AdminUser::TYPE_TEACHER && $tishi != Yii::$app->user->id) {
             if (Yii::$app->user->identity->admin_status == AdminUser::STATUS_ADMIN_PASS_NOT) {
-                $cache->set('tishi',Yii::$app->user->id,5*60*60);
-                Yii::$app->session->setFlash('error','资料审核失败，请到\'个人资料\'查看失败原因');
+                $cache->set('tishi', Yii::$app->user->id, 5 * 60 * 60);
+                Yii::$app->session->setFlash('error', '资料审核失败，请到\'个人资料\'查看失败原因');
             }
         }
         return $this->renderPartial('index');
@@ -121,7 +121,7 @@ class SiteController extends BackendController
         error_reporting(E_ALL);
         $status = [
             'DISK_SPACE' => [
-                'NUM' => ceil( $serverInfo['diskTotal'] - $serverInfo['freeSpace'] ) . 'G' . ' / ' . ceil($serverInfo['diskTotal']) . 'G',
+                'NUM' => ceil($serverInfo['diskTotal'] - $serverInfo['freeSpace']) . 'G' . ' / ' . ceil($serverInfo['diskTotal']) . 'G',
                 'PERCENTAGE' => (floatval($serverInfo['diskTotal']) != 0) ? round(($serverInfo['diskTotal'] - $serverInfo['freeSpace']) / $serverInfo['diskTotal'] * 100, 2) : 0,
             ],
             'MEM' => [
@@ -143,42 +143,42 @@ class SiteController extends BackendController
             'ARTICLE' => [
                 $temp['ARTICLE'],
                 $temp['ARTICLE'] == 0 ? 0 :
-                number_format(ArticleModel::find()->where([
-                        'between',
-                        'created_at',
-                        strtotime(date('Y-m-01')),
-                        strtotime(date('Y-m-01 23:59:59') . " +1 month -1 day")
-                    ])->count('id') / $temp['ARTICLE'] * 100, 2)
+                    number_format(ArticleModel::find()->where([
+                            'between',
+                            'created_at',
+                            strtotime(date('Y-m-01')),
+                            strtotime(date('Y-m-01 23:59:59') . " +1 month -1 day")
+                        ])->count('id') / $temp['ARTICLE'] * 100, 2)
             ],
             'COMMENT' => [
                 $temp['COMMENT'],
                 $temp['COMMENT'] == 0 ? 0 :
-                number_format(Comment::find()->where([
-                        'between',
-                        'created_at',
-                        strtotime(date('Y-m-d 00:00:00')),
-                        time()
-                    ])->count('id') / $temp['COMMENT'] * 100, 2)
+                    number_format(Comment::find()->where([
+                            'between',
+                            'created_at',
+                            strtotime(date('Y-m-d 00:00:00')),
+                            time()
+                        ])->count('id') / $temp['COMMENT'] * 100, 2)
             ],
             'USER' => [
                 $temp['USER'],
                 $temp['USER'] == 0 ? 0 :
-                number_format(User::find()->where([
-                        'between',
-                        'created_at',
-                        strtotime(date('Y-m-01')),
-                        strtotime(date('Y-m-01 23:59:59') . " +1 month -1 day")
-                    ])->count('id') / $temp['USER'] * 100, 2)
+                    number_format(User::find()->where([
+                            'between',
+                            'created_at',
+                            strtotime(date('Y-m-01')),
+                            strtotime(date('Y-m-01 23:59:59') . " +1 month -1 day")
+                        ])->count('id') / $temp['USER'] * 100, 2)
             ],
             'FRIEND_LINK' => [
                 $temp['FRIEND_LINK'],
                 $temp['FRIEND_LINK'] == 0 ? 0 :
-                number_format(FriendlyLink::find()->where([
-                        'between',
-                        'created_at',
-                        strtotime(date('Y-m-01')),
-                        strtotime(date('Y-m-01 23:59:59') . " +1 month -1 day")
-                    ])->count('id') / $temp['FRIEND_LINK'] * 100, 2)
+                    number_format(FriendlyLink::find()->where([
+                            'between',
+                            'created_at',
+                            strtotime(date('Y-m-01')),
+                            strtotime(date('Y-m-01 23:59:59') . " +1 month -1 day")
+                        ])->count('id') / $temp['FRIEND_LINK'] * 100, 2)
             ],
         ];
         $comments = BackendComment::getRecentComments(6);
@@ -197,7 +197,7 @@ class SiteController extends BackendController
      */
     public function actionLogin()
     {
-        if (! Yii::$app->getUser()->getIsGuest()) {
+        if (!Yii::$app->getUser()->getIsGuest()) {
             return $this->goHome();
         }
         $model = new LoginForm();
@@ -215,15 +215,15 @@ class SiteController extends BackendController
         $model = new User();
         $model->setScenario('forget-password');
         if ($model->load(Yii::$app->getRequest()->post())) {
-            $model=User::findOne(['telephone'=>$model->telephone]);
+            $model = User::findOne(['telephone' => $model->telephone]);
             Yii::$app->user->login($model);
             $model->setScenario('forget-password');
             $model->load(Yii::$app->getRequest()->post());
             $model->setPassword($model->password);
-            if ($model->save()){
+            if ($model->save()) {
                 Yii::$app->getSession()->setFlash('success', '密码修改成功');
                 return $this->redirect(['index']);
-            }else{
+            } else {
                 var_dump($model->getErrors());
                 return $this->render('forgetPassword', [
                     'model' => $model,
@@ -247,7 +247,6 @@ class SiteController extends BackendController
 
         return $this->redirect('site/login');
     }
-
 
 
     /**
@@ -308,4 +307,9 @@ class SiteController extends BackendController
         }
     }
 
+
+    public function actionHelp()
+    {
+        return $this->render('help');
+    }
 }

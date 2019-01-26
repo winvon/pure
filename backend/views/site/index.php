@@ -123,6 +123,10 @@ $this->title = yii::t('app', 'Backend Manage System');
                         <a href="javascript:void(0)" onclick="reloadIframe()"><i
                                     class="fa fa-refresh"></i> <?= yii::t('app', 'Refresh') ?></a>
                     </li>
+                    <li class="hidden-xs">
+                        <a href="/site/help" class="J_menuItem" data-id="/site/help" ><i
+                                    class="fa fa-hand-paper-o"></i>帮助</a>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -131,13 +135,15 @@ $this->title = yii::t('app', 'Backend Manage System');
             </button>
             <nav class="page-tabs J_menuTabs">
                 <div class="page-tabs-content">
-                    <?php if (Yii::$app->user->getIdentity()->admin_status == \backend\models\User::STATUS_ADMIN_PASS) { ?>
-                        <a href="javascript:;" class="active J_menuTab"
-                           data-id="<?= Url::to(['site/main']) ?>"><?= yii::t('app', 'Home') ?></a>
-                    <?php } else { ?>
-                        <a href="javascript:;" class="active J_menuTab" data-id="/admin-user/change-important">完善资料<i
+                    <a href="javascript:;" class="active J_menuTab"
+                    <?php if (Yii::$app->user->getIdentity()->admin_status !== \backend\models\User::STATUS_ADMIN_PASS) { ?>
+                        <a href="javascript:;" class="J_menuTab" data-id="/site/help">帮助<i
                                     class="fa fa-times-circle"></i></a>
-                    <?php } ?>
+                    <?php } else{  ?>
+                        <a href="javascript:;" class="active J_menuTab"
+                           data-id="<?= Url::to(['site/main']) ?>">
+                            <?= yii::t('app', 'Home') ?></a>
+                    <?php  }  ?>
 
                 </div>
 
@@ -156,12 +162,11 @@ $this->title = yii::t('app', 'Backend Manage System');
             <?= Html::a('<i class="fa fa fa-sign-out"></i>' . yii::t('app', 'Logout'), Url::toRoute('site/logout'), ['data-method' => 'post', 'class' => 'roll-nav roll-right J_tabExit']) ?>
         </div>
         <div class="row J_mainContent" id="content-main">
-            <?php if (Yii::$app->user->identity->type==AdminUser::TYPE_TEACHER &&Yii::$app->user->identity->admin_status!= AdminUser::STATUS_ADMIN_PASS) {
-                $url = 'admin-user/change-important?lo=1';
-            } else {
-                $url = 'site/main';
-            }
-            ?>
+            <?php if (Yii::$app->user->getIdentity()->admin_status !== \backend\models\User::STATUS_ADMIN_PASS){
+                $url='site/help';
+            }else{
+                $url='site/main';
+            }?>
             <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="<?= Url::to([$url]) ?>"
                     frameborder="0" data-id="<?= Url::to([$url]) ?>" seamless></iframe>
         </div>
