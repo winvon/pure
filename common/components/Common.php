@@ -15,6 +15,7 @@ class Common
     public static $_district='';
 
 
+
     public static function sendRegisterCode()
     {
         $post = Yii::$app->request->post();

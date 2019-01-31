@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use common\components\Telephone;
 use Yii;
 
 /**
@@ -147,15 +148,34 @@ class Action extends \yii\db\ActiveRecord
                     }
                 }
             }
-            if ($this->status == self::STATUS_SUCCESS) {
-                $this->sendOk($this->email, $this->num);
-            }
+
+            $user=$this->user;
+            $param['district']=(string)trim(explode(":", $user->district)[1], ' ');
+            $param['telephone']=$param['district'].$user->telephone;
+            $param['user']=$user->username;
+            $param['content']=$this->num;
         }
         $this->updated_at = time();
         if ($this->status == self::STATUS_FAILED) {
             if (empty($this->reason)) {
                 $this->addError('reason', '审核拒绝，原因须填写');
                 return false;
+            }
+            //如果是审核就发送短信
+            if (@Yii::$app->user->identity->type == \backend\models\User::TYPE_MANAGE) {
+                Telephone::sendByType(Telephone::TYPE_ACTION_PASS_NOT,$param);
+
+                $this->sendNo($this->email, $this->num,$this->reason);
+            }
+        }
+
+        if ($this->status == self::STATUS_SUCCESS) {
+            $this->reason = '';
+            //如果是审核就发送短信
+            if (@Yii::$app->user->identity->type == \backend\models\User::TYPE_MANAGE) {
+                Telephone::sendByType(Telephone::TYPE_ACTION_PASS,$param);
+
+                $this->sendOk($this->email, $this->num);
             }
         }
         return true;
@@ -187,12 +207,32 @@ class Action extends \yii\db\ActiveRecord
         return $res;
     }
 
+    public function sendNo($email, $num,$reason)
+    {
+        $content = $this->contentNo($num,$reason);
+        $res = Yii::$app->mailer->compose()
+            ->setFrom('1165180201@qq.com')
+            ->setTo($email)
+            ->setSubject('阿卡西课程报名')
+            ->setTextBody('Plain text content')
+            ->setHtmlBody($content)
+            ->send();
+        return $res;
+    }
 
     public function contentOk($num)
     {
         return '<div>
             <h3>恭喜您的报名审核成功</h3>
             <p style="font-size: 12px">恭喜您已报名成功，报名编号：' . $num . '，若需修改资料，请登陆到www.purelove.ltd 【我的报名】 修改报名讯息。</p>
+            </div>';
+    }
+
+    public function contentNo($num,$reason)
+    {
+        return '<div>
+            <p>非常抱歉,您的报名未审核成功</p>
+            <p style="font-size: 12px">报名编号：' . $num . '，原因是：' . $reason . '，若需修改资料，请登陆到www.purelove.ltd 【我的报名】 修改报名讯息。</p>
             </div>';
     }
 
@@ -238,5 +278,10 @@ class Action extends \yii\db\ActiveRecord
                 <p>*通讯电话 ：+86-13728987573</p>
             </div>
         </div>';
+    }
+
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'uid']);
     }
 }

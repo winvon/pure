@@ -14,17 +14,45 @@ use Yii;
 
 class Telephone
 {
+    const TYPE_ACTION_PASS = 1;
 
-    public static function send($telephone = '17623006012',$code)
+    const TYPE_ACTION_PASS_NOT = 2;
+
+    public static $district = ['+86', '+886', '+852', '+853'];
+
+    public static function sendByType($type, $param = [])
+    {
+        switch ($type) {
+            case self::TYPE_ACTION_PASS:
+                if (!in_array($param['district'], ['+86', '+886', '+852', '+853'])) {
+                    $string = "【PURELOVE】Dear,Congratulations! Your application has been approved.";
+                } else {
+                    $string = "【PURELOVE】尊敬的学员,恭喜您，您的报名已审核通过.";
+                };
+                break;
+            case self::TYPE_ACTION_PASS_NOT:
+                if (!in_array($param['district'], ['+86', '+886', '+852', '+853'])) {
+                    $string = "【PURELOVE】We are very sorry that your application was not approved. The reason has been notified by email";
+                } else {
+                    $string = "【PURELOVE】尊敬的学员,非常抱歉,您的报名未审核通过.原因已邮件通知.";
+                };
+                break;
+        }
+        Yii::$app->smser->send($param['telephone'], $string);
+        return true;
+    }
+
+
+    public static function send($telephone = '17623006012', $code)
     {
         $res = self::beforeSend($telephone);
         if ($res !== true) {
             return $res;
         }
-        if (!in_array(Common::$_district,['+86','+886','+852','+853']) ){
-            $string= "【PURELOVE】Your verification code is $code, valid within 20 minutes. Don't let it out.";
-        }else{
-            $string= "【PURELOVE】您的验证码是$code,20分钟内有效。请勿泄露。";
+        if (!in_array(Common::$_district, ['+86', '+886', '+852', '+853'])) {
+            $string = "【PURELOVE】Your verification code is $code, valid within 20 minutes. Don't let it out.";
+        } else {
+            $string = "【PURELOVE】您的验证码是$code,20分钟内有效。请勿泄露。";
         }
         Yii::$app->smser->send($telephone, $string);
         return true;
