@@ -44,8 +44,8 @@ $this->title = yii::t('app', 'Backend Manage System');
                     <div class="dropdown profile-element">
                         <span>
                             <img alt="image" class="img-circle" width="64px" height="64px"
-                                 src="<?php if (yii::$app->getUser()->getIdentity()->avatar) {
-                                     echo yii::$app->params['site']['url'] . yii::$app->getUser()->getIdentity()->avatar;
+                                 src="<?php if (@yii::$app->getUser()->getIdentity()->avatar) {
+                                     echo @yii::$app->params['site']['url'] . @yii::$app->getUser()->getIdentity()->avatar;
                                  } else {
                                      echo yii::$app->getRequest()->getBaseUrl() . '/static/img/profile_small.jpg';
                                  } ?>"/>
@@ -53,8 +53,8 @@ $this->title = yii::t('app', 'Backend Manage System');
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="clear">
                                 <span class="block m-t-xs"><strong
-                                            class="font-bold"><?= yii::$app->getUser()->getIdentity()->getRolesNameString() ?></strong></span>
-                                <span class="text-muted text-xs block"><?= yii::$app->getUser()->getIdentity()->username ?>
+                                            class="font-bold"><?php if (!Yii::$app->user->isGuest) echo yii::$app->getUser()->getIdentity()->getRolesNameString() ?></strong></span>
+                                <span class="text-muted text-xs block"><?= @yii::$app->getUser()->getIdentity()->username ?>
                                     <b class="caret"></b></span>
                             </span>
                         </a>
@@ -65,7 +65,7 @@ $this->title = yii::t('app', 'Backend Manage System');
                             <li><a class="J_menuItem"
                                    href="<?= Url::to(['admin-user/change-password']) ?>"><?= yii::t('app', '修改密码') ?></a>
                             </li>
-                            <?php  if (yii::$app->user->identity->type==AdminUser::TYPE_TEACHER) {
+                            <?php  if (@yii::$app->user->identity->type==AdminUser::TYPE_TEACHER) {
                                 ; ?>
                                 <li><a class="J_menuItem"
                                        href="<?= Url::to(['admin-user/change-not-important']) ?>"><?= yii::t('app', '修改个人资料') ?></a>
@@ -136,7 +136,7 @@ $this->title = yii::t('app', 'Backend Manage System');
             <nav class="page-tabs J_menuTabs">
                 <div class="page-tabs-content">
                     <a href="javascript:;" class="active J_menuTab"
-                    <?php if (Yii::$app->user->getIdentity()->admin_status !== \backend\models\User::STATUS_ADMIN_PASS) { ?>
+                    <?php if (@Yii::$app->user->getIdentity()->admin_status !== \backend\models\User::STATUS_ADMIN_PASS) { ?>
                         <a href="javascript:;" class="J_menuTab" data-id="/site/help">帮助<i
                                     class="fa fa-times-circle"></i></a>
                     <?php } else{  ?>
@@ -162,7 +162,7 @@ $this->title = yii::t('app', 'Backend Manage System');
             <?= Html::a('<i class="fa fa fa-sign-out"></i>' . yii::t('app', 'Logout'), Url::toRoute('site/logout'), ['data-method' => 'post', 'class' => 'roll-nav roll-right J_tabExit']) ?>
         </div>
         <div class="row J_mainContent" id="content-main">
-            <?php if (Yii::$app->user->getIdentity()->admin_status !== \backend\models\User::STATUS_ADMIN_PASS){
+            <?php if (@Yii::$app->user->getIdentity()->admin_status !== \backend\models\User::STATUS_ADMIN_PASS){
                 $url='site/help';
             }else{
                 $url='site/main';
